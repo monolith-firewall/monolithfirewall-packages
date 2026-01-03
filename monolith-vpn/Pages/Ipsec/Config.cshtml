@@ -1,0 +1,156 @@
+
+<div class="package-page ipsec-page" data-module="ipsec" data-package="monolith-vpn">
+    <div class="container-fluid p-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="page-title">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+                    </svg>
+                    IPsec VPN
+                </h2>
+                <p class="text-muted">IPsec VPN tunnel configuration and management</p>
+            </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="alert d-none"></div>
+
+        <!-- Main Tabs -->
+        <ul class="nav nav-tabs mb-4" id="ipsecTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" 
+                        type="button" role="tab" aria-controls="settings" aria-selected="true">
+                    Settings
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="connections-tab" data-bs-toggle="tab" data-bs-target="#connections" 
+                        type="button" role="tab" aria-controls="connections" aria-selected="false">
+                    Connections
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="ipsecTabContent">
+            <!-- Settings Tab -->
+            <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <form id="settingsForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">IPsec Settings</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label fw-bold">Enable IPsec</label>
+                                <div class="col-sm-9">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="ipsecEnabled">
+                                        <label class="form-check-label" for="ipsecEnabled">
+                                            Enable IPsec VPN service
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Mode</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="mode">
+                                        <option value="transport">Transport</option>
+                                        <option value="tunnel">Tunnel</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">NAT Traversal</label>
+                                <div class="col-sm-9">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="natTraversal">
+                                        <label class="form-check-label" for="natTraversal">
+                                            Enable NAT traversal (NAT-T)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Dead Peer Detection</label>
+                                <div class="col-sm-9">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="deadPeerDetection">
+                                        <label class="form-check-label" for="deadPeerDetection">
+                                            Enable dead peer detection
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">DPD Interval (seconds)</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="dpdInterval" value="30" min="10" max="300">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Log Level</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="logLevel">
+                                        <option value="error">Error</option>
+                                        <option value="warning">Warning</option>
+                                        <option value="info" selected>Info</option>
+                                        <option value="debug">Debug</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Connections Tab -->
+            <div class="tab-pane fade" id="connections" role="tabpanel" aria-labelledby="connections-tab">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">IPsec Connections</h5>
+                        <button type="button" class="btn btn-sm btn-primary" id="addConnectionBtn">Add Connection</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="connectionsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Local Address</th>
+                                        <th>Remote Address</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No connections configured</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Module CSS - loaded by router -->
+<link rel="stylesheet" href="/_content/Monolith.Vpn/css/ipsec.css" data-module-css="ipsec" />
+
+<!-- Module JavaScript - loaded by router -->
+<script src="/_content/Monolith.Vpn/js/ipsec.js?v=20260101170000" data-module-js="ipsec"></script>

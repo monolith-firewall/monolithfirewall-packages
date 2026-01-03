@@ -1,0 +1,8 @@
+{
+  "id": "monolith-vpn",
+  "name": "Monolith VPN",
+  "version": "1.0.0",
+  "description": "VPN management package with IPsec, OpenVPN, and WireGuard modules",
+  "author": "Monolith FireWall Team",
+  "dependencies": []
+}

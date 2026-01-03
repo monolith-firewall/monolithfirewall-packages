@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/_content/Monolith.Network/Pages/Dhcp/Config.cshtml#leases" />
+    <title>Redirecting to DHCP Configuration...</title>
+</head>
+<body>
+    <p>Redirecting to DHCP Configuration page...</p>
+    <script>
+        // Redirect to the Config page with the leases tab
+        window.location.href = '#/p/monolith-network/dhcp/config';
+        // Trigger the leases tab after a short delay
+        setTimeout(function() {
+            var leasesTab = document.querySelector('#leases-tab');
+            if (leasesTab) {
+                var tab = new bootstrap.Tab(leasesTab);
+                tab.show();
+            }
+        }, 100);
+    </script>
+</body>
+</html>

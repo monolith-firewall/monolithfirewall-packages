@@ -1,0 +1,12 @@
+{
+  "id": "monolith-diagnostics",
+  "name": "Monolith Diagnostics",
+  "version": "1.0.0",
+  "description": "Diagnostics tools package with ping, traceroute, and MTR",
+  "author": "Monolith FireWall Team",
+  "dependencies": [],
+  "aptDependencies": [
+    "traceroute",
+    "mtr"
+  ]
+}

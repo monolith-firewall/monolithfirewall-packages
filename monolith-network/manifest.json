@@ -1,0 +1,34 @@
+{
+  "id": "monolith-network",
+  "name": "Monolith Network",
+  "version": "1.0.0",
+  "description": "Network management package with DHCP, DNS, and firewall modules",
+  "author": "Monolith FireWall Team",
+  "dependencies": [],
+  "firewallIntents": [
+    {
+      "moduleId": "dhcp",
+      "interfaceRole": "lan",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv4",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "67",
+      "description": "Allow DHCP service"
+    },
+    {
+      "moduleId": "dns",
+      "interfaceRole": "lan",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv4",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "53",
+      "description": "Allow DNS resolver"
+    }
+  ]
+}

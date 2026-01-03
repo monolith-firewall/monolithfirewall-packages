@@ -1,0 +1,141 @@
+.diagnostics-output {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 12px;
+  border-radius: 8px;
+  min-height: 120px;
+  max-height: 260px;
+  overflow: auto;
+  font-size: 12px;
+}
+
+.diagnostics-table td,
+.diagnostics-table th {
+  vertical-align: middle;
+}
+
+.mtr-host {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.mtr-ip {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.diagnostics-metric {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.diagnostics-metric .metric-label {
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.diagnostics-metric .metric-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.diagnostics-chart {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.chart-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.chart-label {
+  width: 180px;
+  font-weight: 600;
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.chart-hop {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+}
+
+.chart-host {
+  font-size: 13px;
+  color: #0f172a;
+  word-break: break-word;
+}
+
+.chart-ip {
+  font-size: 11px;
+  color: #64748b;
+}
+
+.chart-bars {
+  flex: 1;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.chart-bar.avg {
+  background: #2563eb;
+  opacity: 0.7;
+}
+
+.chart-bar.loss {
+  background: #ef4444;
+  opacity: 0.85;
+}
+
+.chart-values {
+  width: 120px;
+  font-size: 12px;
+  color: #475569;
+  text-align: right;
+}
+
+.sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 28px;
+  min-width: 90px;
+  padding: 4px 6px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.sparkline.empty {
+  background: #f1f5f9;
+}
+
+.sparkline-bar {
+  width: 4px;
+  background: linear-gradient(180deg, #38bdf8 0%, #2563eb 100%);
+  border-radius: 999px;
+}

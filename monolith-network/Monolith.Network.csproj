@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Monolith.Network</RootNamespace>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../src/Monolith.FireWall.Common/Monolith.FireWall.Common.csproj" />
+    <ProjectReference Include="../../src/Monolith.FireWall.Platform/Monolith.FireWall.Platform.csproj" />
+    <ProjectReference Include="../../src/Libs/CodeLogic3/src/CodeLogic.csproj" />
+    <ProjectReference Include="../../src/Libs/CodeLogic3.Libs/CL.SQLite/CL.SQLite.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+</Project>

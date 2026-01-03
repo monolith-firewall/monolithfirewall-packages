@@ -1,0 +1,176 @@
+
+<div class="package-page wireguard-page" data-module="wireguard" data-package="monolith-vpn">
+    <div class="container-fluid p-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="page-title">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z"/>
+                    </svg>
+                    WireGuard
+                </h2>
+                <p class="text-muted">WireGuard VPN interface and peer management</p>
+            </div>
+        </div>
+
+        <!-- Status Messages -->
+        <div id="statusMessage" class="alert d-none"></div>
+
+        <!-- Main Tabs -->
+        <ul class="nav nav-tabs mb-4" id="wireguardTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="settings-tab" data-bs-toggle="tab" data-bs-target="#settings" 
+                        type="button" role="tab" aria-controls="settings" aria-selected="true">
+                    Settings
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="interfaces-tab" data-bs-toggle="tab" data-bs-target="#interfaces" 
+                        type="button" role="tab" aria-controls="interfaces" aria-selected="false">
+                    Interfaces
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="peers-tab" data-bs-toggle="tab" data-bs-target="#peers" 
+                        type="button" role="tab" aria-controls="peers" aria-selected="false">
+                    Peers
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="wireguardTabContent">
+            <!-- Settings Tab -->
+            <div class="tab-pane fade show active" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                <form id="settingsForm">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">WireGuard Settings</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label fw-bold">Enable WireGuard</label>
+                                <div class="col-sm-9">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="wireguardEnabled">
+                                        <label class="form-check-label" for="wireguardEnabled">
+                                            Enable WireGuard service
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Listen Port</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="listenPort" value="51820" min="1" max="65535">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Forward Traffic</label>
+                                <div class="col-sm-9">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="forwardTraffic">
+                                        <label class="form-check-label" for="forwardTraffic">
+                                            Enable IP forwarding
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">Log Level</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" id="logLevel">
+                                        <option value="error">Error</option>
+                                        <option value="warning">Warning</option>
+                                        <option value="info" selected>Info</option>
+                                        <option value="debug">Debug</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Save Settings</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Interfaces Tab -->
+            <div class="tab-pane fade" id="interfaces" role="tabpanel" aria-labelledby="interfaces-tab">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">WireGuard Interfaces</h5>
+                        <button type="button" class="btn btn-sm btn-primary" id="addInterfaceBtn">Add Interface</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="interfacesTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Listen Port</th>
+                                        <th>Status</th>
+                                        <th>Peers</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No interfaces configured</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peers Tab -->
+            <div class="tab-pane fade" id="peers" role="tabpanel" aria-labelledby="peers-tab">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">WireGuard Peers</h5>
+                        <div>
+                            <select class="form-select form-select-sm d-inline-block" id="interfaceFilter" style="width: auto;">
+                                <option value="">All Interfaces</option>
+                            </select>
+                            <button type="button" class="btn btn-sm btn-primary ms-2" id="addPeerBtn">Add Peer</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="peersTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Interface</th>
+                                        <th>Public Key</th>
+                                        <th>Endpoint</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted">No peers configured</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Module CSS - loaded by router -->
+<link rel="stylesheet" href="/_content/Monolith.Vpn/css/wireguard.css" data-module-css="wireguard" />
+
+<!-- Module JavaScript - loaded by router -->
+<script src="/_content/Monolith.Vpn/js/wireguard.js?v=20260101170000" data-module-js="wireguard"></script>
