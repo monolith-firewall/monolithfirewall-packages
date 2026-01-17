@@ -191,32 +191,53 @@
         }
 
         // Setup validation and data getters for setup wizard
-        window.validateDhcpSetup = function() {
+        // These functions are called by PackageStep page
+        window.validatePackageSetup = function(packageId, pageId) {
+            if (packageId !== 'monolith-network' || pageId !== 'dhcp') {
+                return true; // Not our page
+            }
+            
             if (!$('#dhcpEnabled').is(':checked')) {
                 return true; // If disabled, no validation needed
             }
             
             if (!$('#dhcpInterface').val()) {
-                alert('Please select a network interface');
+                if (typeof Monolith !== 'undefined' && Monolith.UI) {
+                    Monolith.UI.showError('Please select a network interface');
+                } else {
+                    alert('Please select a network interface');
+                }
                 return false;
             }
             
             const poolStart = $('#poolStart').val();
             const poolEnd = $('#poolEnd').val();
             if (!poolStart || !poolEnd) {
-                alert('Please enter both pool start and end addresses');
+                if (typeof Monolith !== 'undefined' && Monolith.UI) {
+                    Monolith.UI.showError('Please enter both pool start and end addresses');
+                } else {
+                    alert('Please enter both pool start and end addresses');
+                }
                 return false;
             }
             
             if (!$('#dhcpGateway').val()) {
-                alert('Please enter a default gateway');
+                if (typeof Monolith !== 'undefined' && Monolith.UI) {
+                    Monolith.UI.showError('Please enter a default gateway');
+                } else {
+                    alert('Please enter a default gateway');
+                }
                 return false;
             }
             
             return true;
         };
 
-        window.getDhcpSetupData = function() {
+        window.getPackageSetupData = function(packageId, pageId) {
+            if (packageId !== 'monolith-network' || pageId !== 'dhcp') {
+                return {}; // Not our page
+            }
+            
             if (!$('#dhcpEnabled').is(':checked')) {
                 return { enabled: false };
             }

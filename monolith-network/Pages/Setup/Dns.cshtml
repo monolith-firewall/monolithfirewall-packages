@@ -119,7 +119,12 @@
         }
 
         // Setup validation and data getters for setup wizard
-        window.validateDnsSetup = function() {
+        // These functions are called by PackageStep page
+        window.validatePackageSetup = function(packageId, pageId) {
+            if (packageId !== 'monolith-network' || pageId !== 'dns') {
+                return true; // Not our page
+            }
+            
             if (!$('#dnsEnabled').is(':checked')) {
                 return true; // If disabled, no validation needed
             }
@@ -134,14 +139,22 @@
             });
             
             if (!hasForwardDns) {
-                alert('Please provide at least one forward DNS server');
+                if (typeof Monolith !== 'undefined' && Monolith.UI) {
+                    Monolith.UI.showError('Please provide at least one forward DNS server');
+                } else {
+                    alert('Please provide at least one forward DNS server');
+                }
                 return false;
             }
             
             return true;
         };
 
-        window.getDnsSetupData = function() {
+        window.getPackageSetupData = function(packageId, pageId) {
+            if (packageId !== 'monolith-network' || pageId !== 'dns') {
+                return {}; // Not our page
+            }
+            
             if (!$('#dnsEnabled').is(':checked')) {
                 return { enabled: false };
             }
