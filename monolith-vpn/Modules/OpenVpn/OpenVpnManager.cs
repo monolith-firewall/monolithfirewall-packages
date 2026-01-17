@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Monolith.FireWall.Common.Interfaces;
+using Monolith.FireWall.Platform.Validation;
 
 namespace Monolith.Vpn.Modules.OpenVpn;
 
@@ -38,7 +39,12 @@ public class OpenVpnManager
             if (settings == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidateSettings(settings, out var error))
+            {
+                _context?.Logger?.LogWarning($"OpenVPN settings validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update OpenVPN config
             return true;
         }
@@ -70,7 +76,12 @@ public class OpenVpnManager
             if (server == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidateServer(server, out var error))
+            {
+                _context?.Logger?.LogWarning($"OpenVPN server validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update OpenVPN config
             return true;
         }
@@ -88,7 +99,12 @@ public class OpenVpnManager
             if (client == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidateClient(client, out var error))
+            {
+                _context?.Logger?.LogWarning($"OpenVPN client validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update OpenVPN config
             return true;
         }
@@ -137,6 +153,90 @@ public class OpenVpnManager
     {
         // For now, just return success
         // In future, execute: systemctl stop openvpn-client@<client-id>
+        return true;
+    }
+
+    private static bool ValidateSettings(OpenVpnSettings settings, out string? error)
+    {
+        error = null;
+        if (settings.Port <= 0 || settings.Port > 65535)
+        {
+            error = "Port must be 1-65535";
+            return false;
+        }
+
+        if (!string.Equals(settings.Protocol, "udp", StringComparison.OrdinalIgnoreCase) &&
+            !string.Equals(settings.Protocol, "tcp", StringComparison.OrdinalIgnoreCase))
+        {
+            error = "Protocol must be udp or tcp";
+            return false;
+        }
+
+        if (settings.DnsServers != null && settings.DnsServers.Length > 0 &&
+            !PlatformValidators.AreValidDnsServers(settings.DnsServers))
+        {
+            error = "One or more DNS servers are invalid";
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool ValidateServer(OpenVpnServerConfig server, out string? error)
+    {
+        error = null;
+
+        if (!string.IsNullOrWhiteSpace(server.Network) && !PlatformValidators.IsValidIp(server.Network))
+        {
+            error = "Network must be a valid IP address";
+            return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(server.Netmask) && !PlatformValidators.IsValidIpv4(server.Netmask))
+        {
+            error = "Netmask must be a valid IPv4 mask";
+            return false;
+        }
+
+        if (server.Port <= 0 || server.Port > 65535)
+        {
+            error = "Port must be 1-65535";
+            return false;
+        }
+
+        if (!string.Equals(server.Protocol, "udp", StringComparison.OrdinalIgnoreCase) &&
+            !string.Equals(server.Protocol, "tcp", StringComparison.OrdinalIgnoreCase))
+        {
+            error = "Protocol must be udp or tcp";
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool ValidateClient(OpenVpnClientConfig client, out string? error)
+    {
+        error = null;
+
+        if (!string.IsNullOrWhiteSpace(client.ServerAddress) && !PlatformValidators.IsValidIp(client.ServerAddress))
+        {
+            error = "Server address must be a valid IP";
+            return false;
+        }
+
+        if (client.ServerPort <= 0 || client.ServerPort > 65535)
+        {
+            error = "Server port must be 1-65535";
+            return false;
+        }
+
+        if (!string.Equals(client.Protocol, "udp", StringComparison.OrdinalIgnoreCase) &&
+            !string.Equals(client.Protocol, "tcp", StringComparison.OrdinalIgnoreCase))
+        {
+            error = "Protocol must be udp or tcp";
+            return false;
+        }
+
         return true;
     }
 }

@@ -1,3 +1,8 @@
+@page "/p/monolith-vpn/ipsec/config"
+@{
+    Layout = null;
+    ViewData["Title"] = "IPsec VPN";
+}
 
 <div class="package-page ipsec-page" data-module="ipsec" data-package="monolith-vpn">
     <div class="container-fluid p-4">
@@ -149,8 +154,7 @@
     </div>
 </div>
 
-<!-- Module CSS - loaded by router -->
-<link rel="stylesheet" href="/_content/Monolith.Vpn/css/ipsec.css" data-module-css="ipsec" />
-
-<!-- Module JavaScript - loaded by router -->
-<script src="/_content/Monolith.Vpn/js/ipsec.js?v=20260101170000" data-module-js="ipsec"></script>
+@section Scripts {
+    <link rel="stylesheet" href="/_content/Monolith.Vpn/css/ipsec.css" data-module-css="ipsec" />
+    <script src="/_content/Monolith.Vpn/js/ipsec.js" data-module-js="ipsec"></script>
+}

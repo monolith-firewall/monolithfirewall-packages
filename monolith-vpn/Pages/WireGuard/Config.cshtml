@@ -1,3 +1,8 @@
+@page "/p/monolith-vpn/wireguard/config"
+@{
+    Layout = null;
+    ViewData["Title"] = "WireGuard";
+}
 
 <div class="package-page wireguard-page" data-module="wireguard" data-package="monolith-vpn">
     <div class="container-fluid p-4">
@@ -169,8 +174,7 @@
     </div>
 </div>
 
-<!-- Module CSS - loaded by router -->
-<link rel="stylesheet" href="/_content/Monolith.Vpn/css/wireguard.css" data-module-css="wireguard" />
-
-<!-- Module JavaScript - loaded by router -->
-<script src="/_content/Monolith.Vpn/js/wireguard.js?v=20260101170000" data-module-js="wireguard"></script>
+@section Scripts {
+    <link rel="stylesheet" href="/_content/Monolith.Vpn/css/wireguard.css" data-module-css="wireguard" />
+    <script src="/_content/Monolith.Vpn/js/wireguard.js" data-module-js="wireguard"></script>
+}

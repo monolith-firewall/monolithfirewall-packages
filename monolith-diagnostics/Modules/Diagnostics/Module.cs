@@ -88,4 +88,10 @@ public class DiagnosticsModule : IMonolithModule
     {
         return Array.Empty<CronJobDefinition>();
     }
+
+    public IEnumerable<ISetupWizardPage> GetSetupWizardPages()
+    {
+        // Diagnostics doesn't need setup wizard pages
+        return Array.Empty<ISetupWizardPage>();
+    }
 }

@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Monolith.FireWall.Common.Interfaces;
+using Monolith.FireWall.Platform.Validation;
 
 namespace Monolith.Vpn.Modules.Ipsec;
 
@@ -35,7 +36,12 @@ public class IpsecManager
             if (settings == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidateSettings(settings, out var error))
+            {
+                _context?.Logger?.LogWarning($"IPsec settings validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update strongSwan/ipsec config
             return true;
         }
@@ -60,7 +66,12 @@ public class IpsecManager
             if (connection == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidateConnection(connection, out var error))
+            {
+                _context?.Logger?.LogWarning($"IPsec connection validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update ipsec config
             return true;
         }
@@ -88,6 +99,64 @@ public class IpsecManager
     {
         // For now, just return success
         // In future, execute: ipsec down <connection-id>
+        return true;
+    }
+
+    private static bool ValidateSettings(IpsecSettings settings, out string? error)
+    {
+        error = null;
+        if (!string.Equals(settings.Mode, "transport", StringComparison.OrdinalIgnoreCase) &&
+            !string.Equals(settings.Mode, "tunnel", StringComparison.OrdinalIgnoreCase))
+        {
+            error = "Mode must be transport or tunnel";
+            return false;
+        }
+
+        if (settings.DeadPeerDetectionInterval <= 0)
+        {
+            error = "DPD interval must be greater than zero";
+            return false;
+        }
+
+        return true;
+    }
+
+    private static bool ValidateConnection(IpsecConnectionConfig conn, out string? error)
+    {
+        error = null;
+
+        if (!string.IsNullOrWhiteSpace(conn.LocalAddress) && !PlatformValidators.IsValidIp(conn.LocalAddress))
+        {
+            error = "Local address must be a valid IP";
+            return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(conn.RemoteAddress) && !PlatformValidators.IsValidIp(conn.RemoteAddress))
+        {
+            error = "Remote address must be a valid IP";
+            return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(conn.LocalSubnet) &&
+            !PlatformValidators.TryParseCidr(conn.LocalSubnet, out _, out _))
+        {
+            error = "Local subnet must be a valid CIDR";
+            return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(conn.RemoteSubnet) &&
+            !PlatformValidators.TryParseCidr(conn.RemoteSubnet, out _, out _))
+        {
+            error = "Remote subnet must be a valid CIDR";
+            return false;
+        }
+
+        if (conn.Lifetime <= 0)
+        {
+            error = "Lifetime must be greater than zero";
+            return false;
+        }
+
         return true;
     }
 }

@@ -1,12 +1,16 @@
 using Monolith.FireWall.Common.Enums;
 using Monolith.FireWall.Common.Interfaces;
 using Monolith.FireWall.Common.Models;
+using Monolith.Network.Modules.Dhcp;
+using CodeLogic;
+using CL.SQLite.Services;
 
 namespace Monolith.Network.Modules.Dhcp;
 
-public class DhcpModule : IMonolithModule, IMonolithModuleLifecycle
+public class DhcpModule : IMonolithModule, IMonolithModuleLifecycle, IModuleConfigGenerator
 {
     private IModuleContext? _context;
+    private readonly DhcpConfigGenerator _configGenerator = new();
 
     public string Id => "dhcp";
     public string Name => "DHCP Server";
@@ -216,7 +220,14 @@ public class DhcpModule : IMonolithModule, IMonolithModuleLifecycle
 
     public IEnumerable<ServiceDefinition> GetServices()
     {
-        return Array.Empty<ServiceDefinition>();
+        return new[]
+        {
+            new ServiceDefinition(
+                "isc-dhcp-server",
+                "isc-dhcp-server.service",
+                Array.Empty<string>() // No special capabilities required
+            )
+        };
     }
 
     public IEnumerable<AptDependency> GetAptDependencies()
@@ -260,11 +271,35 @@ public class DhcpModule : IMonolithModule, IMonolithModuleLifecycle
         return Array.Empty<CronJobDefinition>();
     }
 
+    public IEnumerable<ISetupWizardPage> GetSetupWizardPages()
+    {
+        // DHCP setup page - configure DHCP server during initial setup
+        return new[]
+        {
+            new SetupWizardPage
+            {
+                Id = "dhcp",
+                Title = "DHCP Server Configuration",
+                Description = "Configure the DHCP server to provide IP addresses to devices on your network",
+                Order = 10,
+                Route = "/setup/package/monolith-network/dhcp",
+                IsRequired = false,
+                IsComplete = false,
+                PackageId = "monolith-network",
+                ModuleId = "dhcp"
+            }
+        };
+    }
+
     public string PackageId => "monolith-network";
 
     public Task OnStartAsync(IModuleContext context)
     {
         _context = context;
+        
+        // Note: Database tables are synced during package installation.
+        // OnStartAsync is kept for other initialization tasks if needed.
+        
         return Task.CompletedTask;
     }
 
@@ -277,5 +312,17 @@ public class DhcpModule : IMonolithModule, IMonolithModuleLifecycle
     public Task OnConfigChangedAsync(string key, string? oldValue, string? newValue)
     {
         return Task.CompletedTask;
+    }
+
+    // IModuleConfigGenerator implementation
+    public bool RequiresServiceRestart => _configGenerator.RequiresServiceRestart;
+
+    public IEnumerable<string> GetConfigFilePaths() => _configGenerator.GetConfigFilePaths();
+
+    public Task<ModuleConfigGenerationResult> GenerateConfigAsync(
+        IModuleContext context,
+        CancellationToken cancellationToken)
+    {
+        return _configGenerator.GenerateConfigAsync(context, cancellationToken);
     }
 }

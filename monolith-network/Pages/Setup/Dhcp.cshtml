@@ -1,0 +1,265 @@
+@page "/setup/package/monolith-network/dhcp"
+@{
+    Layout = null;
+    ViewData["Title"] = "DHCP Server Setup";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-router me-2"></i>
+                        DHCP Server Configuration
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-4">
+                        Configure the DHCP server to automatically assign IP addresses to devices on your network.
+                    </p>
+
+                    <form id="dhcp-setup-form">
+                        <!-- Enable DHCP -->
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="dhcpEnabled" checked>
+                                <label class="form-check-label fw-bold" for="dhcpEnabled">
+                                    Enable DHCP Server
+                                </label>
+                            </div>
+                            <div class="form-text">Enable DHCP server to automatically assign IP addresses to network devices.</div>
+                        </div>
+
+                        <div id="dhcp-config-fields">
+                            <!-- Interface Selection -->
+                            <div class="mb-3">
+                                <label for="dhcpInterface" class="form-label">Network Interface <span class="text-danger">*</span></label>
+                                <select class="form-select" id="dhcpInterface" required>
+                                    <option value="">Loading interfaces...</option>
+                                </select>
+                                <div class="form-text">Select the network interface where DHCP server will run (typically LAN interface).</div>
+                            </div>
+
+                            <!-- Pool Range -->
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="poolStart" class="form-label">Pool Start Address <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="poolStart" placeholder="192.168.1.100" 
+                                           pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" required>
+                                    <div class="form-text">First IP address in the DHCP pool.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="poolEnd" class="form-label">Pool End Address <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="poolEnd" placeholder="192.168.1.200" 
+                                           pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" required>
+                                    <div class="form-text">Last IP address in the DHCP pool.</div>
+                                </div>
+                            </div>
+
+                            <!-- Gateway -->
+                            <div class="mb-3">
+                                <label for="dhcpGateway" class="form-label">Default Gateway <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="dhcpGateway" placeholder="192.168.1.1" 
+                                       pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$" required>
+                                <div class="form-text">Default gateway IP address for DHCP clients (typically the firewall's LAN IP).</div>
+                            </div>
+
+                            <!-- DNS Servers -->
+                            <div class="mb-3">
+                                <label class="form-label">DNS Servers</label>
+                                <div id="dns-servers-list"></div>
+                                <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="add-dns-server">
+                                    <i class="bi bi-plus-circle me-1"></i> Add DNS Server
+                                </button>
+                                <div class="form-text">DNS servers to provide to DHCP clients (leave empty to use system DNS).</div>
+                            </div>
+
+                            <!-- Lease Time -->
+                            <div class="mb-3">
+                                <label for="leaseTime" class="form-label">Lease Time (hours)</label>
+                                <input type="number" class="form-control" id="leaseTime" value="24" min="1" max="168">
+                                <div class="form-text">How long DHCP clients can keep their IP address (default: 24 hours).</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        let dnsServerCount = 0;
+
+        function addDnsServer(value = '') {
+            const container = $('#dns-servers-list');
+            const id = 'dns-' + Date.now() + '-' + (++dnsServerCount);
+            const html = `
+                <div class="input-group mb-2" id="${id}">
+                    <input type="text" class="form-control dns-server-input" 
+                           placeholder="8.8.8.8" value="${value}"
+                           pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$">
+                    <button type="button" class="btn btn-outline-danger" onclick="removeDnsServer('${id}')">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            `;
+            container.append(html);
+        }
+
+        window.removeDnsServer = function(id) {
+            $('#' + id).remove();
+        };
+
+        function loadInterfaces() {
+            Monolith.API.get('/api/interfaces/assignments')
+                .then(response => {
+                    const data = response.data || response.Data || response;
+                    const assigned = data.assigned || data.Assigned || [];
+                    const select = $('#dhcpInterface');
+                    select.empty();
+                    select.append('<option value="">Select interface...</option>');
+                    
+                    // Filter for LAN interfaces
+                    const lanInterfaces = assigned.filter(iface => {
+                        const role = iface.role || iface.Role;
+                        return role === 'lan' || role === 'Lan' || role === 1;
+                    });
+                    
+                    lanInterfaces.forEach(iface => {
+                        const name = iface.interface || iface.Interface;
+                        const displayName = iface.name || iface.Name || name;
+                        select.append(`<option value="${name}">${displayName} (${name})</option>`);
+                    });
+                    
+                    // If no LAN interfaces, show all assigned
+                    if (lanInterfaces.length === 0) {
+                        assigned.forEach(iface => {
+                            const name = iface.interface || iface.Interface;
+                            const displayName = iface.name || iface.Name || name;
+                            select.append(`<option value="${name}">${displayName} (${name})</option>`);
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.error('Failed to load interfaces:', err);
+                    $('#dhcpInterface').html('<option value="">Error loading interfaces</option>');
+                });
+        }
+
+        function loadCurrentSettings() {
+            // Try to load existing DHCP configuration
+            Monolith.API.get('/api/packages/monolith-network/modules/dhcp/get-interfaces')
+                .then(response => {
+                    const data = response.data || response.Data || response;
+                    if (data && data.length > 0) {
+                        const config = data[0];
+                        if (config.enabled || config.Enabled) {
+                            $('#dhcpEnabled').prop('checked', true);
+                        }
+                        if (config.interface || config.Interface) {
+                            $('#dhcpInterface').val(config.interface || config.Interface);
+                        }
+                        if (config.poolStart || config.PoolStart) {
+                            $('#poolStart').val(config.poolStart || config.PoolStart);
+                        }
+                        if (config.poolEnd || config.PoolEnd) {
+                            $('#poolEnd').val(config.poolEnd || config.PoolEnd);
+                        }
+                        if (config.gateway || config.Gateway) {
+                            $('#dhcpGateway').val(config.gateway || config.Gateway);
+                        }
+                        if (config.leaseTime || config.LeaseTime) {
+                            $('#leaseTime').val((config.leaseTime || config.LeaseTime) / 3600); // Convert seconds to hours
+                        }
+                        // Load DNS servers
+                        const dns1 = config.dns1 || config.Dns1;
+                        const dns2 = config.dns2 || config.Dns2;
+                        const dns3 = config.dns3 || config.Dns3;
+                        const dns4 = config.dns4 || config.Dns4;
+                        if (dns1) addDnsServer(dns1);
+                        if (dns2) addDnsServer(dns2);
+                        if (dns3) addDnsServer(dns3);
+                        if (dns4) addDnsServer(dns4);
+                    }
+                })
+                .catch(err => {
+                    console.log('No existing DHCP configuration found, using defaults');
+                });
+        }
+
+        // Setup validation and data getters for setup wizard
+        window.validateDhcpSetup = function() {
+            if (!$('#dhcpEnabled').is(':checked')) {
+                return true; // If disabled, no validation needed
+            }
+            
+            if (!$('#dhcpInterface').val()) {
+                alert('Please select a network interface');
+                return false;
+            }
+            
+            const poolStart = $('#poolStart').val();
+            const poolEnd = $('#poolEnd').val();
+            if (!poolStart || !poolEnd) {
+                alert('Please enter both pool start and end addresses');
+                return false;
+            }
+            
+            if (!$('#dhcpGateway').val()) {
+                alert('Please enter a default gateway');
+                return false;
+            }
+            
+            return true;
+        };
+
+        window.getDhcpSetupData = function() {
+            if (!$('#dhcpEnabled').is(':checked')) {
+                return { enabled: false };
+            }
+            
+            const dnsServers = [];
+            $('.dns-server-input').each(function() {
+                const val = $(this).val().trim();
+                if (val) {
+                    dnsServers.push(val);
+                }
+            });
+            
+            return {
+                enabled: true,
+                interface: $('#dhcpInterface').val(),
+                poolStart: $('#poolStart').val(),
+                poolEnd: $('#poolEnd').val(),
+                gateway: $('#dhcpGateway').val(),
+                dnsServers: dnsServers,
+                leaseTime: parseInt($('#leaseTime').val()) * 3600 // Convert hours to seconds
+            };
+        };
+
+        // Toggle config fields based on enabled checkbox
+        $('#dhcpEnabled').on('change', function() {
+            $('#dhcp-config-fields').toggle($(this).is(':checked'));
+        });
+
+        // Setup DNS server management
+        $('#add-dns-server').on('click', function() {
+            addDnsServer();
+        });
+
+        // Initialize
+        $(document).ready(function() {
+            loadInterfaces();
+            loadCurrentSettings();
+            
+            // Set default DNS servers if none exist
+            if ($('#dns-servers-list .dns-server-input').length === 0) {
+                addDnsServer('8.8.8.8');
+                addDnsServer('8.8.4.4');
+            }
+        });
+    })();
+</script>

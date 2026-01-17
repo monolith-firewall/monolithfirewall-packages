@@ -1,3 +1,8 @@
+@page "/p/monolith-vpn/openvpn/config"
+@{
+    Layout = null;
+    ViewData["Title"] = "OpenVPN";
+}
 
 <div class="package-page openvpn-page" data-module="openvpn" data-package="monolith-vpn">
     <div class="container-fluid p-4">
@@ -186,8 +191,7 @@
     </div>
 </div>
 
-<!-- Module CSS - loaded by router -->
-<link rel="stylesheet" href="/_content/Monolith.Vpn/css/openvpn.css" data-module-css="openvpn" />
-
-<!-- Module JavaScript - loaded by router -->
-<script src="/_content/Monolith.Vpn/js/openvpn.js?v=20260101170000" data-module-js="openvpn"></script>
+@section Scripts {
+    <link rel="stylesheet" href="/_content/Monolith.Vpn/css/openvpn.css" data-module-css="openvpn" />
+    <script src="/_content/Monolith.Vpn/js/openvpn.js" data-module-js="openvpn"></script>
+}

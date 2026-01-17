@@ -1,12 +1,14 @@
 using Monolith.FireWall.Common.Enums;
 using Monolith.FireWall.Common.Interfaces;
 using Monolith.FireWall.Common.Models;
+using Monolith.Network.Modules.Dns;
 
 namespace Monolith.Network.Modules.Dns;
 
-public class DnsModule : IMonolithModule, IMonolithModuleLifecycle
+public class DnsModule : IMonolithModule, IMonolithModuleLifecycle, IModuleConfigGenerator
 {
     private IModuleContext? _context;
+    private readonly DnsConfigGenerator _configGenerator = new();
 
     public string Id => "dns";
     public string Name => "DNS Server";
@@ -181,14 +183,21 @@ public class DnsModule : IMonolithModule, IMonolithModuleLifecycle
 
     public IEnumerable<ServiceDefinition> GetServices()
     {
-        return Array.Empty<ServiceDefinition>();
+        return new[]
+        {
+            new ServiceDefinition(
+                "dnsmasq",
+                "dnsmasq.service",
+                Array.Empty<string>() // No special capabilities required
+            )
+        };
     }
 
     public IEnumerable<AptDependency> GetAptDependencies()
     {
         return new[]
         {
-            new AptDependency("bind9", "BIND9 DNS server")
+            new AptDependency("dnsmasq", "DNS forwarder and DHCP server integration")
         };
     }
 
@@ -225,6 +234,26 @@ public class DnsModule : IMonolithModule, IMonolithModuleLifecycle
         return Array.Empty<CronJobDefinition>();
     }
 
+    public IEnumerable<ISetupWizardPage> GetSetupWizardPages()
+    {
+        // DNS setup page - configure DNS server during initial setup
+        return new[]
+        {
+            new SetupWizardPage
+            {
+                Id = "dns",
+                Title = "DNS Server Configuration",
+                Description = "Configure the DNS server for local domain resolution",
+                Order = 11,
+                Route = "/setup/package/monolith-network/dns",
+                IsRequired = false,
+                IsComplete = false,
+                PackageId = "monolith-network",
+                ModuleId = "dns"
+            }
+        };
+    }
+
     public string PackageId => "monolith-network";
 
     public Task OnStartAsync(IModuleContext context)
@@ -242,5 +271,17 @@ public class DnsModule : IMonolithModule, IMonolithModuleLifecycle
     public Task OnConfigChangedAsync(string key, string? oldValue, string? newValue)
     {
         return Task.CompletedTask;
+    }
+
+    // IModuleConfigGenerator implementation
+    public bool RequiresServiceRestart => _configGenerator.RequiresServiceRestart;
+
+    public IEnumerable<string> GetConfigFilePaths() => _configGenerator.GetConfigFilePaths();
+
+    public Task<ModuleConfigGenerationResult> GenerateConfigAsync(
+        IModuleContext context,
+        CancellationToken cancellationToken)
+    {
+        return _configGenerator.GenerateConfigAsync(context, cancellationToken);
     }
 }

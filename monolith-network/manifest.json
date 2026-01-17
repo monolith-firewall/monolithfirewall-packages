@@ -1,10 +1,19 @@
 {
   "id": "monolith-network",
   "name": "Monolith Network",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Network management package with DHCP, DNS, and firewall modules",
   "author": "Monolith FireWall Team",
   "dependencies": [],
+  "capabilities": {
+    "autoFirewall": true,
+    "autoGateway": true
+  },
+  "interfaceDefaults": {
+    "dhcp": { "role": "lan", "addressFamilies": [ "ipv4" ] },
+    "dns": { "role": "lan", "addressFamilies": [ "ipv4", "ipv6" ] }
+  },
+  "requiresFirewallOpen": true,
   "firewallIntents": [
     {
       "moduleId": "dhcp",
@@ -23,12 +32,60 @@
       "interfaceRole": "lan",
       "direction": "in",
       "action": "pass",
+      "addressFamily": "ipv6",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "547",
+      "description": "Allow DHCPv6 service (RA/SLAAC assist)"
+    },
+    {
+      "moduleId": "dns",
+      "interfaceRole": "lan",
+      "direction": "in",
+      "action": "pass",
       "addressFamily": "ipv4",
       "protocol": "udp",
       "sourceType": "any",
       "destinationType": "any",
       "destinationPort": "53",
       "description": "Allow DNS resolver"
+    },
+    {
+      "moduleId": "dns",
+      "interfaceRole": "lan",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv6",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "53",
+      "description": "Allow DNS resolver (IPv6)"
+    },
+    {
+      "moduleId": "dns",
+      "interfaceRole": "lan",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv4",
+      "protocol": "tcp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "53",
+      "description": "Allow DNS TCP resolver"
+    },
+    {
+      "moduleId": "dns",
+      "interfaceRole": "lan",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv6",
+      "protocol": "tcp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "53",
+      "description": "Allow DNS TCP resolver (IPv6)"
     }
   ]
 }

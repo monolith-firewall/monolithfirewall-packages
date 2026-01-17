@@ -39,7 +39,7 @@ function loadSettings() {
             // Handle both uppercase and lowercase property names
             if ((response.success || response.Success) && (response.data || response.Data)) {
                 var settings = response.data || response.Data;
-                $('#dhcpEnabled').prop('checked', settings.enabled || settings.Enabled || false);
+                // Removed dhcpEnabled - controlled via interface enable/disable
                 $('#defaultLeaseTime').val(settings.defaultLeaseTime || settings.DefaultLeaseTime || 7200);
                 $('#maxLeaseTime').val(settings.maxLeaseTime || settings.MaxLeaseTime || 86400);
                 $('#dnsRegistration').prop('checked', settings.dnsRegistration || settings.DnsRegistration || false);
@@ -54,7 +54,7 @@ function loadSettings() {
 
 function saveSettings() {
     var settings = {
-        enabled: $('#dhcpEnabled').is(':checked'),
+        // Removed enabled - controlled via interface enable/disable
         defaultLeaseTime: parseInt($('#defaultLeaseTime').val()),
         maxLeaseTime: parseInt($('#maxLeaseTime').val()),
         dnsRegistration: $('#dnsRegistration').is(':checked'),

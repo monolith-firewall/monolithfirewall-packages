@@ -1,8 +1,81 @@
 {
   "id": "monolith-vpn",
   "name": "Monolith VPN",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "VPN management package with IPsec, OpenVPN, and WireGuard modules",
   "author": "Monolith FireWall Team",
-  "dependencies": []
+  "dependencies": [],
+  "capabilities": {
+    "autoFirewall": true,
+    "autoGateway": true
+  },
+  "requiresFirewallOpen": true,
+  "firewallIntents": [
+    {
+      "moduleId": "wireguard",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv4",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "51820",
+      "description": "Allow WireGuard"
+    },
+    {
+      "moduleId": "wireguard",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv6",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "51820",
+      "description": "Allow WireGuard (IPv6)"
+    },
+    {
+      "moduleId": "ipsec",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv4",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "500,4500",
+      "description": "Allow IPsec IKE/ESP helper"
+    },
+    {
+      "moduleId": "ipsec",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv6",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "500,4500",
+      "description": "Allow IPsec IKE/ESP helper (IPv6)"
+    },
+    {
+      "moduleId": "openvpn",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv4",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "1194",
+      "description": "Allow OpenVPN"
+    },
+    {
+      "moduleId": "openvpn",
+      "direction": "in",
+      "action": "pass",
+      "addressFamily": "ipv6",
+      "protocol": "udp",
+      "sourceType": "any",
+      "destinationType": "any",
+      "destinationPort": "1194",
+      "description": "Allow OpenVPN (IPv6)"
+    }
+  ]
 }

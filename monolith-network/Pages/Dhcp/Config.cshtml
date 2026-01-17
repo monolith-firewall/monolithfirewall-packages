@@ -1,3 +1,9 @@
+@page "/p/monolith-network/dhcp/config"
+@model Monolith.Network.Pages.Dhcp.ConfigModel
+@{
+    Layout = null;
+    ViewData["Title"] = "DHCP Configuration";
+}
 
 <div class="package-page dhcp-page" data-module="dhcp" data-package="monolith-network">
     <div class="container-fluid p-4">
@@ -60,22 +66,6 @@
                             <h5 class="mb-0">General DHCP Settings</h5>
                         </div>
                         <div class="card-body">
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label fw-bold">Enable DHCP Server</label>
-                                <div class="col-sm-9">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="dhcpEnabled">
-                                        <label class="form-check-label" for="dhcpEnabled">
-                                            Enable Kea DHCP server globally
-                                        </label>
-                                    </div>
-                                    <div class="form-text">
-                                        Master switch to enable/disable the DHCP server. Individual interfaces can still be configured separately.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <hr class="my-4">
 
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">Default Lease Time</label>
@@ -203,8 +193,7 @@
     </div>
 </div>
 
-<!-- Module CSS - loaded by router -->
-<link rel="stylesheet" href="/_content/Monolith.Network/css/dhcp.css" data-module-css="dhcp" />
-
-<!-- Module JavaScript - loaded by router -->
-<script src="/_content/Monolith.Network/js/dhcp.js?v=20260101170000" data-module-js="dhcp"></script>
+@section Scripts {
+    <link rel="stylesheet" href="/_content/Monolith.Network/css/dhcp.css" data-module-css="dhcp" />
+    <script src="/_content/Monolith.Network/js/dhcp.js" data-module-js="dhcp"></script>
+}

@@ -5,14 +5,26 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Monolith.Network</RootNamespace>
+    
+    <!-- RCL Configuration -->
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <RazorLangVersion>latest</RazorLangVersion>
+    
+    <!-- Ensure Razor views are compiled into main DLL -->
+    <EnableDefaultRazorCompileItems>true</EnableDefaultRazorCompileItems>
+    <EnableDefaultRazorGenerateItems>true</EnableDefaultRazorGenerateItems>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/Monolith.FireWall.Common/Monolith.FireWall.Common.csproj" />
-    <ProjectReference Include="../../src/Monolith.FireWall.Platform/Monolith.FireWall.Platform.csproj" />
-    <ProjectReference Include="../../src/Libs/CodeLogic3/src/CodeLogic.csproj" />
-    <ProjectReference Include="../../src/Libs/CodeLogic3.Libs/CL.SQLite/CL.SQLite.csproj" />
+    <ProjectReference Include="../../../src/Monolith.FireWall.Common/Monolith.FireWall.Common.csproj" />
+    <ProjectReference Include="../../../src/Monolith.FireWall.Platform/Monolith.FireWall.Platform.csproj" />
+    <ProjectReference Include="../../../src/Monolith.FireWall.Core/Monolith.FireWall.Core.csproj" />
+    <ProjectReference Include="../../../tmp/CodeLogic3/src/CodeLogic.csproj" />
+    <ProjectReference Include="../../../tmp/CodeLogic3.Libs/CL.SQLite/CL.SQLite.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>

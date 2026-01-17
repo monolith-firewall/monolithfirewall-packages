@@ -1,3 +1,8 @@
+@page "/p/monolith-network/dns/config"
+@{
+    Layout = null;
+    ViewData["Title"] = "DNS Configuration";
+}
 
 <div class="package-page dns-page" data-module="dns" data-package="monolith-network">
     <div class="container-fluid p-4">
@@ -231,8 +236,7 @@
     </div>
 </div>
 
-<!-- Module CSS - loaded by router -->
-<link rel="stylesheet" href="/_content/Monolith.Network/css/dns.css" data-module-css="dns" />
-
-<!-- Module JavaScript - loaded by router -->
-<script src="/_content/Monolith.Network/js/dns.js?v=20260101170000" data-module-js="dns"></script>
+@section Scripts {
+    <link rel="stylesheet" href="/_content/Monolith.Network/css/dns.css" data-module-css="dns" />
+    <script src="/_content/Monolith.Network/js/dns.js" data-module-js="dns"></script>
+}

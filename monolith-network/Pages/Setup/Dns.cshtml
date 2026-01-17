@@ -1,0 +1,186 @@
+@page "/setup/package/monolith-network/dns"
+@{
+    Layout = null;
+    ViewData["Title"] = "DNS Server Setup";
+}
+
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-globe me-2"></i>
+                        DNS Server Configuration
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-4">
+                        Configure the DNS server for local domain name resolution and forwarding.
+                    </p>
+
+                    <form id="dns-setup-form">
+                        <!-- Enable DNS -->
+                        <div class="mb-4">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="dnsEnabled">
+                                <label class="form-check-label fw-bold" for="dnsEnabled">
+                                    Enable DNS Server
+                                </label>
+                            </div>
+                            <div class="form-text">Enable DNS server for local domain resolution and forwarding.</div>
+                        </div>
+
+                        <div id="dns-config-fields">
+                            <!-- Forward DNS Servers -->
+                            <div class="mb-3">
+                                <label class="form-label">Forward DNS Servers</label>
+                                <div id="forward-dns-list"></div>
+                                <button type="button" class="btn btn-sm btn-outline-secondary mt-2" id="add-forward-dns">
+                                    <i class="bi bi-plus-circle me-1"></i> Add Forward DNS Server
+                                </button>
+                                <div class="form-text">Upstream DNS servers to forward queries to (e.g., 8.8.8.8, 1.1.1.1).</div>
+                            </div>
+
+                            <!-- Local Domain -->
+                            <div class="mb-3">
+                                <label for="localDomain" class="form-label">Local Domain</label>
+                                <input type="text" class="form-control" id="localDomain" placeholder="local">
+                                <div class="form-text">Local domain name for internal resolution (optional).</div>
+                            </div>
+
+                            <!-- DNSSEC Validation -->
+                            <div class="mb-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="dnssecEnabled" checked>
+                                    <label class="form-check-label" for="dnssecEnabled">
+                                        Enable DNSSEC Validation
+                                    </label>
+                                </div>
+                                <div class="form-text">Validate DNS responses using DNSSEC for security.</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        let forwardDnsCount = 0;
+
+        function addForwardDns(value = '') {
+            const container = $('#forward-dns-list');
+            const id = 'forward-dns-' + Date.now() + '-' + (++forwardDnsCount);
+            const html = `
+                <div class="input-group mb-2" id="${id}">
+                    <input type="text" class="form-control forward-dns-input" 
+                           placeholder="8.8.8.8" value="${value}"
+                           pattern="^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$">
+                    <button type="button" class="btn btn-outline-danger" onclick="removeForwardDns('${id}')">
+                        <i class="bi bi-x"></i>
+                    </button>
+                </div>
+            `;
+            container.append(html);
+        }
+
+        window.removeForwardDns = function(id) {
+            $('#' + id).remove();
+        };
+
+        function loadCurrentSettings() {
+            // Try to load existing DNS configuration
+            Monolith.API.get('/api/packages/monolith-network/modules/dns/get-settings')
+                .then(response => {
+                    const data = response.data || response.Data || response;
+                    if (data) {
+                        if (data.enabled || data.Enabled) {
+                            $('#dnsEnabled').prop('checked', true);
+                        }
+                        if (data.localDomain || data.LocalDomain) {
+                            $('#localDomain').val(data.localDomain || data.LocalDomain);
+                        }
+                        if (data.dnssecEnabled !== undefined) {
+                            $('#dnssecEnabled').prop('checked', data.dnssecEnabled || data.DnssecEnabled);
+                        }
+                        // Load forward DNS servers
+                        const forwarders = data.forwarders || data.Forwarders || [];
+                        if (forwarders.length > 0) {
+                            forwarders.forEach(server => addForwardDns(server));
+                        }
+                    }
+                })
+                .catch(err => {
+                    console.log('No existing DNS configuration found, using defaults');
+                });
+        }
+
+        // Setup validation and data getters for setup wizard
+        window.validateDnsSetup = function() {
+            if (!$('#dnsEnabled').is(':checked')) {
+                return true; // If disabled, no validation needed
+            }
+            
+            // Check if at least one forward DNS server is provided
+            let hasForwardDns = false;
+            $('.forward-dns-input').each(function() {
+                if ($(this).val().trim()) {
+                    hasForwardDns = true;
+                    return false; // break
+                }
+            });
+            
+            if (!hasForwardDns) {
+                alert('Please provide at least one forward DNS server');
+                return false;
+            }
+            
+            return true;
+        };
+
+        window.getDnsSetupData = function() {
+            if (!$('#dnsEnabled').is(':checked')) {
+                return { enabled: false };
+            }
+            
+            const forwarders = [];
+            $('.forward-dns-input').each(function() {
+                const val = $(this).val().trim();
+                if (val) {
+                    forwarders.push(val);
+                }
+            });
+            
+            return {
+                enabled: true,
+                forwarders: forwarders,
+                localDomain: $('#localDomain').val().trim() || null,
+                dnssecEnabled: $('#dnssecEnabled').is(':checked')
+            };
+        };
+
+        // Toggle config fields based on enabled checkbox
+        $('#dnsEnabled').on('change', function() {
+            $('#dns-config-fields').toggle($(this).is(':checked'));
+        });
+
+        // Setup forward DNS management
+        $('#add-forward-dns').on('click', function() {
+            addForwardDns();
+        });
+
+        // Initialize
+        $(document).ready(function() {
+            loadCurrentSettings();
+            
+            // Set default forward DNS servers if none exist
+            if ($('#forward-dns-list .forward-dns-input').length === 0) {
+                addForwardDns('8.8.8.8');
+                addForwardDns('8.8.4.4');
+            }
+        });
+    })();
+</script>

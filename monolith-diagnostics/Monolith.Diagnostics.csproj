@@ -5,11 +5,23 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Monolith.Diagnostics</RootNamespace>
+    
+    <!-- RCL Configuration -->
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <RazorLangVersion>latest</RazorLangVersion>
+    
+    <!-- Ensure Razor views are compiled into main DLL -->
+    <EnableDefaultRazorCompileItems>true</EnableDefaultRazorCompileItems>
+    <EnableDefaultRazorGenerateItems>true</EnableDefaultRazorGenerateItems>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/Monolith.FireWall.Common/Monolith.FireWall.Common.csproj" />
+    <ProjectReference Include="../../../src/Monolith.FireWall.Common/Monolith.FireWall.Common.csproj" />
+    <ProjectReference Include="../../../tmp/CodeLogic3/src/CodeLogic.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>

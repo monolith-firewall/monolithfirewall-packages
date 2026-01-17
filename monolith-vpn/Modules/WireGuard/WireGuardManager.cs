@@ -1,5 +1,6 @@
 using System.Text.Json;
 using Monolith.FireWall.Common.Interfaces;
+using Monolith.FireWall.Platform.Validation;
 
 namespace Monolith.Vpn.Modules.WireGuard;
 
@@ -35,7 +36,12 @@ public class WireGuardManager
             if (settings == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidateWireGuardSettings(settings, out var error))
+            {
+                _context?.Logger?.LogWarning($"WireGuard settings validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update WireGuard config
             return true;
         }
@@ -67,7 +73,12 @@ public class WireGuardManager
             if (interfaceConfig == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidateInterface(interfaceConfig, out var error))
+            {
+                _context?.Logger?.LogWarning($"WireGuard interface validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update WireGuard config
             return true;
         }
@@ -85,7 +96,12 @@ public class WireGuardManager
             if (peer == null)
                 return false;
 
-            // For now, just validate
+            if (!ValidatePeer(peer, out var error))
+            {
+                _context?.Logger?.LogWarning($"WireGuard peer validation failed: {error}");
+                return false;
+            }
+
             // In future, save to database and update WireGuard config
             return true;
         }
@@ -128,5 +144,109 @@ public class WireGuardManager
         // For now, return placeholder
         // In future, execute: wg genkey | tee privatekey | wg pubkey > publickey
         return "{\"privateKey\":\"\",\"publicKey\":\"\"}";
+    }
+
+    private static bool ValidateWireGuardSettings(WireGuardSettings settings, out string? error)
+    {
+        error = null;
+        if (settings.ListenPort <= 0 || settings.ListenPort > 65535)
+        {
+            error = "Listen port must be 1-65535";
+            return false;
+        }
+
+        if (settings.AllowedIps != null && settings.AllowedIps.Length > 0)
+        {
+            foreach (var cidr in settings.AllowedIps)
+            {
+                if (string.IsNullOrWhiteSpace(cidr) || !PlatformValidators.TryParseCidr(cidr, out _, out _))
+                {
+                    error = $"Invalid allowed IP: {cidr}";
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private static bool ValidateInterface(WireGuardInterfaceConfig cfg, out string? error)
+    {
+        error = null;
+        if (string.IsNullOrWhiteSpace(cfg.Name) || !PlatformValidators.IsValidInterfaceName(cfg.Name))
+        {
+            error = "Interface name is required and must be valid";
+            return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(cfg.Address) &&
+            !PlatformValidators.TryParseCidr(cfg.Address, out _, out _))
+        {
+            error = "Address must be a valid CIDR";
+            return false;
+        }
+
+        if (cfg.ListenPort <= 0 || cfg.ListenPort > 65535)
+        {
+            error = "Listen port must be 1-65535";
+            return false;
+        }
+
+        if (cfg.DnsServers != null && cfg.DnsServers.Length > 0 &&
+            !PlatformValidators.AreValidDnsServers(cfg.DnsServers))
+        {
+            error = "One or more DNS servers are invalid";
+            return false;
+        }
+
+        if (cfg.AllowedIps != null)
+        {
+            foreach (var cidr in cfg.AllowedIps)
+            {
+                if (!PlatformValidators.TryParseCidr(cidr, out _, out _))
+                {
+                    error = $"Invalid allowed IP: {cidr}";
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    private static bool ValidatePeer(WireGuardPeerConfig peer, out string? error)
+    {
+        error = null;
+        if (string.IsNullOrWhiteSpace(peer.PublicKey))
+        {
+            error = "Peer public key is required";
+            return false;
+        }
+
+        if (!string.IsNullOrWhiteSpace(peer.AllowedIps))
+        {
+            var entries = peer.AllowedIps.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            foreach (var cidr in entries)
+            {
+                if (!PlatformValidators.TryParseCidr(cidr, out _, out _))
+                {
+                    error = $"Invalid allowed IP: {cidr}";
+                    return false;
+                }
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(peer.Endpoint))
+        {
+            var parts = peer.Endpoint.Split(':', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 2 || !PlatformValidators.IsValidIp(parts[0]) ||
+                !int.TryParse(parts[1], out var port) || port <= 0 || port > 65535)
+            {
+                error = "Endpoint must be host:port with a valid IP and port";
+                return false;
+            }
+        }
+
+        return true;
     }
 }

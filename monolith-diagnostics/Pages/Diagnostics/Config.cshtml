@@ -1,4 +1,9 @@
-@* Diagnostics Package Page *@
+@page "/p/monolith-diagnostics/diagnostics/config"
+@{
+    Layout = null;
+    ViewData["Title"] = "Diagnostics";
+}
+
 <div class="package-page diagnostics-page" data-module="diagnostics" data-package="monolith-diagnostics">
     <div class="container-fluid p-4">
         <div class="row mb-4">
@@ -202,3 +207,8 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <link rel="stylesheet" href="/_content/Monolith.Diagnostics/css/diagnostics.css" data-module-css="diagnostics" />
+    <script src="/_content/Monolith.Diagnostics/js/diagnostics.js" data-module-js="diagnostics"></script>
+}

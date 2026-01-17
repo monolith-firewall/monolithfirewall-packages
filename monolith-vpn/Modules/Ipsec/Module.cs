@@ -221,5 +221,11 @@ public class IpsecModule : IMonolithModule
         return Array.Empty<CronJobDefinition>();
     }
 
+    public IEnumerable<ISetupWizardPage> GetSetupWizardPages()
+    {
+        // VPN modules don't need setup wizard pages (optional configuration)
+        return Array.Empty<ISetupWizardPage>();
+    }
+
     public string PackageId => "monolith-vpn";
 }
