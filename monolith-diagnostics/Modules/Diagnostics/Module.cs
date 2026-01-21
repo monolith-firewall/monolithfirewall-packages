@@ -20,10 +20,24 @@ public class DiagnosticsModule : IMonolithModule
         return new[]
         {
             new MenuDefinition(
-                "diagnostics",
-                "Diagnostics",
+                "diagnostics-ping",
+                "Ping",
                 "activity",
                 10,
+                new[] { "diagnostics.read" }
+            ),
+            new MenuDefinition(
+                "diagnostics-traceroute",
+                "Traceroute",
+                "activity",
+                11,
+                new[] { "diagnostics.read" }
+            ),
+            new MenuDefinition(
+                "diagnostics-mtr",
+                "MTR",
+                "activity",
+                12,
                 new[] { "diagnostics.read" }
             )
         };
@@ -34,8 +48,18 @@ public class DiagnosticsModule : IMonolithModule
         return new[]
         {
             new PageDefinition(
-                "/p/monolith-diagnostics/diagnostics",
-                "/_content/Monolith.Diagnostics/Pages/Diagnostics/Config.cshtml",
+                "/p/monolith-diagnostics/diagnostics/ping",
+                "/_content/Monolith.Diagnostics/Pages/Diagnostics/Ping.cshtml",
+                new[] { "diagnostics.read" }
+            ),
+            new PageDefinition(
+                "/p/monolith-diagnostics/diagnostics/traceroute",
+                "/_content/Monolith.Diagnostics/Pages/Diagnostics/Traceroute.cshtml",
+                new[] { "diagnostics.read" }
+            ),
+            new PageDefinition(
+                "/p/monolith-diagnostics/diagnostics/mtr",
+                "/_content/Monolith.Diagnostics/Pages/Diagnostics/Mtr.cshtml",
                 new[] { "diagnostics.read" }
             )
         };

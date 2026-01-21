@@ -1,0 +1,132 @@
+@page "/p/monolith-diagnostics/diagnostics/mtr"
+@{
+    Layout = null;
+    ViewData["Title"] = "Multi-Trace Route (MTR)";
+}
+
+<div class="package-page diagnostics-page" data-module="diagnostics" data-package="monolith-diagnostics">
+    <div class="container-fluid p-4">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="page-title">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16" class="me-2">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.392.087-2.672.246-.19.135-.23.554-.12.867z"/>
+                    </svg>
+                    Multi-Trace Route (MTR)
+                </h2>
+                <p class="text-muted">Continuous network path analysis with statistics</p>
+            </div>
+        </div>
+
+        <div id="diagnosticsStatus" class="alert d-none"></div>
+
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="mb-0">MTR Configuration</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="mtrForm" class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label">Host</label>
+                                <input type="text" class="form-control" id="mtrHost" placeholder="8.8.8.8 or example.com" required autofocus>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Count</label>
+                                <input type="number" class="form-control" id="mtrCount" min="1" max="50" value="10">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Interval (ms)</label>
+                                <input type="number" class="form-control" id="mtrInterval" min="200" max="5000" value="1000">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Refresh (ms)</label>
+                                <input type="number" class="form-control" id="mtrRefresh" min="1000" max="10000" value="2000">
+                            </div>
+                            <div class="col-md-6 d-flex align-items-end">
+                                <div class="form-check form-switch w-100">
+                                    <input class="form-check-input" type="checkbox" id="mtrResolve">
+                                    <label class="form-check-label" for="mtrResolve">Resolve Hostnames</label>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex flex-wrap gap-2">
+                                <button type="submit" class="btn btn-primary" id="mtrRun">Run Once</button>
+                                <button type="button" class="btn btn-outline-primary" id="mtrLive">Start Live</button>
+                                <button type="button" class="btn btn-outline-danger" id="mtrStop" style="display: none;">Stop</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="mtrTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="mtr-results-tab" data-bs-toggle="tab" data-bs-target="#mtr-results" type="button" role="tab">Results</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="mtr-graphs-tab" data-bs-toggle="tab" data-bs-target="#mtr-graphs" type="button" role="tab">Graphs</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="mtr-stats-tab" data-bs-toggle="tab" data-bs-target="#mtr-stats" type="button" role="tab">Statistics</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="mtrTabContent">
+                            <div class="tab-pane fade show active" id="mtr-results" role="tabpanel">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0">Trace Results</h6>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary" id="mtrCopy">Copy</button>
+                                </div>
+                                <div class="table-responsive mb-3">
+                                    <table class="table table-sm diagnostics-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Hop</th>
+                                                <th>Host</th>
+                                                <th>Loss %</th>
+                                                <th>Avg (ms)</th>
+                                                <th>Last</th>
+                                                <th>Best</th>
+                                                <th>Worst</th>
+                                                <th>StdDev</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="mtrTable">
+                                            <tr><td colspan="8" class="text-muted text-center">No results yet.</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <pre id="mtrOutput" class="diagnostics-output">No results yet.</pre>
+                            </div>
+                            <div class="tab-pane fade" id="mtr-graphs" role="tabpanel">
+                                <div id="mtrGraphsContainer">
+                                    <div class="text-center text-muted py-5">
+                                        <p>Run MTR to see graphs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="mtr-stats" role="tabpanel">
+                                <div id="mtrStatsContainer">
+                                    <div class="text-center text-muted py-5">
+                                        <p>Run MTR to see statistics</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="/_content/Monolith.Diagnostics/css/diagnostics.css" data-module-css="diagnostics" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="/_content/Monolith.Diagnostics/js/diagnostics-mtr.js" data-module-js="diagnostics-mtr"></script>
+}

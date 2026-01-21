@@ -4,20 +4,12 @@
     ViewData["Title"] = "DNS Server Setup";
 }
 
-<div class="container-fluid py-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-10 col-xl-8">
-            <div class="card shadow-sm">
-                <div class="card-header">
-                    <h5 class="mb-0">
-                        <i class="bi bi-globe me-2"></i>
-                        DNS Server Configuration
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <p class="text-muted mb-4">
-                        Configure the DNS server for local domain name resolution and forwarding.
-                    </p>
+<!-- DNS Setup Content - styled for setup wizard -->
+<div class="setup-form-content">
+    <h3 class="mb-3"><i class="bi bi-globe me-2"></i>DNS Server Configuration</h3>
+    <p class="text-muted mb-4">
+        Configure the DNS server for local domain name resolution and forwarding.
+    </p>
 
                     <form id="dns-setup-form">
                         <!-- Enable DNS -->
@@ -61,15 +53,27 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script>
     (function() {
-        let forwardDnsCount = 0;
+        // Wait for jQuery to be available
+        function waitForJQuery(callback) {
+            if (typeof jQuery !== 'undefined' || typeof $ !== 'undefined') {
+                callback();
+            } else {
+                setTimeout(() => waitForJQuery(callback), 100);
+            }
+        }
+        
+        waitForJQuery(function() {
+            const $ = window.jQuery || window.$;
+            initDnsSetup();
+        });
+        
+        function initDnsSetup() {
+            const $ = window.jQuery || window.$;
+            let forwardDnsCount = 0;
 
         function addForwardDns(value = '') {
             const container = $('#forward-dns-list');
@@ -185,15 +189,16 @@
             addForwardDns();
         });
 
-        // Initialize
-        $(document).ready(function() {
-            loadCurrentSettings();
-            
-            // Set default forward DNS servers if none exist
-            if ($('#forward-dns-list .forward-dns-input').length === 0) {
-                addForwardDns('8.8.8.8');
-                addForwardDns('8.8.4.4');
-            }
-        });
+            // Initialize
+            $(document).ready(function() {
+                loadCurrentSettings();
+                
+                // Set default forward DNS servers if none exist
+                if ($('#forward-dns-list .forward-dns-input').length === 0) {
+                    addForwardDns('8.8.8.8');
+                    addForwardDns('8.8.4.4');
+                }
+            });
+        }
     })();
 </script>
