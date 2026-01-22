@@ -8,5 +8,1425 @@
   "aptDependencies": [
     "traceroute",
     "mtr"
+  ],
+  "bundledDebs": [
+    {
+      "fileName": "adwaita-icon-theme_48.1-1_all.deb",
+      "packageName": "adwaita-icon-theme",
+      "version": "48.1-1",
+      "architecture": "all",
+      "dependencies": [
+        "gtk-update-icon-cache",
+        "hicolor-icon-theme"
+      ]
+    },
+    {
+      "fileName": "at-spi2-common_2.56.2-1+deb13u1_all.deb",
+      "packageName": "at-spi2-common",
+      "version": "2.56.2-1+deb13u1",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "dconf-gsettings-backend_0.40.0-5_amd64.deb",
+      "packageName": "dconf-gsettings-backend",
+      "version": "0.40.0-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "dconf-service",
+        "dconf-service",
+        "libdconf1",
+        "libc6",
+        "libglib2.0-0t64"
+      ]
+    },
+    {
+      "fileName": "dconf-service_0.40.0-5_amd64.deb",
+      "packageName": "dconf-service",
+      "version": "0.40.0-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "default-dbus-session-bus",
+        "dbus-session-bus",
+        "libdconf1",
+        "procps",
+        "libc6",
+        "libglib2.0-0t64"
+      ]
+    },
+    {
+      "fileName": "debconf_1.5.91_all.deb",
+      "packageName": "debconf",
+      "version": "1.5.91",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fontconfig_2.15.0-2.3_amd64.deb",
+      "packageName": "fontconfig",
+      "version": "2.15.0-2.3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libfontconfig1",
+        "libfreetype6",
+        "fontconfig-config"
+      ]
+    },
+    {
+      "fileName": "fontconfig-config_2.15.0-2.3_amd64.deb",
+      "packageName": "fontconfig-config",
+      "version": "2.15.0-2.3",
+      "architecture": "amd64",
+      "dependencies": [
+        "debconf",
+        "debconf-2.0",
+        "fonts-dejavu-core",
+        "fonts-liberation",
+        "fonts-croscore",
+        "fonts-freefont-otf",
+        "fonts-freefont-ttf",
+        "fonts-urw-base35",
+        "fonts-texgyre",
+        "fonts-noto-core"
+      ]
+    },
+    {
+      "fileName": "fonts-croscore_20201225-2_all.deb",
+      "packageName": "fonts-croscore",
+      "version": "20201225-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fonts-dejavu-core_2.37-8_all.deb",
+      "packageName": "fonts-dejavu-core",
+      "version": "2.37-8",
+      "architecture": "all",
+      "dependencies": [
+        "fonts-dejavu-mono"
+      ]
+    },
+    {
+      "fileName": "fonts-dejavu-mono_2.37-8_all.deb",
+      "packageName": "fonts-dejavu-mono",
+      "version": "2.37-8",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fonts-freefont-otf_20211204+svn4273-2_all.deb",
+      "packageName": "fonts-freefont-otf",
+      "version": "20211204+svn4273-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fonts-freefont-ttf_20211204+svn4273-2_all.deb",
+      "packageName": "fonts-freefont-ttf",
+      "version": "20211204+svn4273-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fonts-liberation_1%3a2.1.5-3_all.deb",
+      "packageName": "fonts-liberation",
+      "version": "1:2.1.5-3",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fonts-noto-core_20201225-2_all.deb",
+      "packageName": "fonts-noto-core",
+      "version": "20201225-2",
+      "architecture": "all",
+      "dependencies": [
+        "fonts-noto-mono"
+      ]
+    },
+    {
+      "fileName": "fonts-noto-mono_20201225-2_all.deb",
+      "packageName": "fonts-noto-mono",
+      "version": "20201225-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fonts-texgyre_20180621-6_all.deb",
+      "packageName": "fonts-texgyre",
+      "version": "20180621-6",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "fonts-urw-base35_20200910-8_all.deb",
+      "packageName": "fonts-urw-base35",
+      "version": "20200910-8",
+      "architecture": "all",
+      "dependencies": [
+        "xfonts-utils"
+      ]
+    },
+    {
+      "fileName": "gcc-14-base_14.2.0-19_amd64.deb",
+      "packageName": "gcc-14-base",
+      "version": "14.2.0-19",
+      "architecture": "amd64",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "gtk-update-icon-cache_4.18.6+ds-2_amd64.deb",
+      "packageName": "gtk-update-icon-cache",
+      "version": "4.18.6+ds-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgdk-pixbuf-2.0-0",
+        "libglib2.0-0t64"
+      ]
+    },
+    {
+      "fileName": "hicolor-icon-theme_0.18-2_all.deb",
+      "packageName": "hicolor-icon-theme",
+      "version": "0.18-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "init-system-helpers_1.69~deb13u1_all.deb",
+      "packageName": "init-system-helpers",
+      "version": "1.69~deb13u1",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libatk1.0-0t64_2.56.2-1+deb13u1_amd64.deb",
+      "packageName": "libatk1.0-0t64",
+      "version": "2.56.2-1+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libglib2.0-0t64",
+        "at-spi2-common"
+      ]
+    },
+    {
+      "fileName": "libatk-bridge2.0-0t64_2.56.2-1+deb13u1_amd64.deb",
+      "packageName": "libatk-bridge2.0-0t64",
+      "version": "2.56.2-1+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libatk1.0-0t64",
+        "libatspi2.0-0t64",
+        "libc6",
+        "libdbus-1-3",
+        "libglib2.0-0t64"
+      ]
+    },
+    {
+      "fileName": "libatomic1_14.2.0-19_amd64.deb",
+      "packageName": "libatomic1",
+      "version": "14.2.0-19",
+      "architecture": "amd64",
+      "dependencies": [
+        "gcc-14-base",
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libatspi2.0-0t64_2.56.2-1+deb13u1_amd64.deb",
+      "packageName": "libatspi2.0-0t64",
+      "version": "2.56.2-1+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libdbus-1-3",
+        "libglib2.0-0t64",
+        "libx11-6",
+        "libxi6"
+      ]
+    },
+    {
+      "fileName": "libavahi-client3_0.8-16_amd64.deb",
+      "packageName": "libavahi-client3",
+      "version": "0.8-16",
+      "architecture": "amd64",
+      "dependencies": [
+        "libavahi-common3",
+        "libc6",
+        "libdbus-1-3"
+      ]
+    },
+    {
+      "fileName": "libavahi-common3_0.8-16_amd64.deb",
+      "packageName": "libavahi-common3",
+      "version": "0.8-16",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libavahi-common-data"
+      ]
+    },
+    {
+      "fileName": "libavahi-common-data_0.8-16_amd64.deb",
+      "packageName": "libavahi-common-data",
+      "version": "0.8-16",
+      "architecture": "amd64",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libblkid1_2.41-5_amd64.deb",
+      "packageName": "libblkid1",
+      "version": "2.41-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libbrotli1_1.1.0-2+b7_amd64.deb",
+      "packageName": "libbrotli1",
+      "version": "1.1.0-2+b7",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libbz2-1.0_1.0.8-6_amd64.deb",
+      "packageName": "libbz2-1.0",
+      "version": "1.0.8-6",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libc6_2.41-12+deb13u1_amd64.deb",
+      "packageName": "libc6",
+      "version": "2.41-12+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libgcc-s1"
+      ]
+    },
+    {
+      "fileName": "libcairo2_1.18.4-1+b1_amd64.deb",
+      "packageName": "libcairo2",
+      "version": "1.18.4-1+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libfontconfig1",
+        "libfreetype6",
+        "libpixman-1-0",
+        "libpng16-16t64",
+        "libx11-6",
+        "libxcb-render0",
+        "libxcb-shm0",
+        "libxcb1",
+        "libxext6",
+        "libxrender1",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libcairo-gobject2_1.18.4-1+b1_amd64.deb",
+      "packageName": "libcairo-gobject2",
+      "version": "1.18.4-1+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libcairo2",
+        "libglib2.0-0t64"
+      ]
+    },
+    {
+      "fileName": "libcap2_1%3a2.75-10+b3_amd64.deb",
+      "packageName": "libcap2",
+      "version": "1:2.75-10+b3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libcloudproviders0_0.3.6-2_amd64.deb",
+      "packageName": "libcloudproviders0",
+      "version": "0.3.6-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libglib2.0-0t64"
+      ]
+    },
+    {
+      "fileName": "libcolord2_1.4.7-3_amd64.deb",
+      "packageName": "libcolord2",
+      "version": "1.4.7-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libglib2.0-0t64",
+        "liblcms2-2",
+        "libudev1"
+      ]
+    },
+    {
+      "fileName": "libcom-err2_1.47.2-3+b7_amd64.deb",
+      "packageName": "libcom-err2",
+      "version": "1.47.2-3+b7",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libcups2t64_2.4.10-3+deb13u2_amd64.deb",
+      "packageName": "libcups2t64",
+      "version": "2.4.10-3+deb13u2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libavahi-client3",
+        "libavahi-common3",
+        "libc6",
+        "libgnutls30t64",
+        "libgssapi-krb5-2",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libdatrie1_0.2.13-3+b1_amd64.deb",
+      "packageName": "libdatrie1",
+      "version": "0.2.13-3+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libdbus-1-3_1.16.2-2_amd64.deb",
+      "packageName": "libdbus-1-3",
+      "version": "1.16.2-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libsystemd0"
+      ]
+    },
+    {
+      "fileName": "libdconf1_0.40.0-5_amd64.deb",
+      "packageName": "libdconf1",
+      "version": "0.40.0-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libglib2.0-0t64"
+      ]
+    },
+    {
+      "fileName": "libdeflate0_1.23-2_amd64.deb",
+      "packageName": "libdeflate0",
+      "version": "1.23-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libepoxy0_1.5.10-2_amd64.deb",
+      "packageName": "libepoxy0",
+      "version": "1.5.10-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libexpat1_2.7.1-2_amd64.deb",
+      "packageName": "libexpat1",
+      "version": "2.7.1-2",
+      "architecture": "amd64",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libffi8_3.4.8-2_amd64.deb",
+      "packageName": "libffi8",
+      "version": "3.4.8-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libfontconfig1_2.15.0-2.3_amd64.deb",
+      "packageName": "libfontconfig1",
+      "version": "2.15.0-2.3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libexpat1",
+        "libfreetype6",
+        "fontconfig-config"
+      ]
+    },
+    {
+      "fileName": "libfontenc1_1%3a1.1.8-1+b2_amd64.deb",
+      "packageName": "libfontenc1",
+      "version": "1:1.1.8-1+b2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libfreetype6_2.13.3+dfsg-1_amd64.deb",
+      "packageName": "libfreetype6",
+      "version": "2.13.3+dfsg-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libbrotli1",
+        "libbz2-1.0",
+        "libc6",
+        "libpng16-16t64",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libfribidi0_1.0.16-1_amd64.deb",
+      "packageName": "libfribidi0",
+      "version": "1.0.16-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libgcc-s1_14.2.0-19_amd64.deb",
+      "packageName": "libgcc-s1",
+      "version": "14.2.0-19",
+      "architecture": "amd64",
+      "dependencies": [
+        "gcc-14-base",
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libgdk-pixbuf-2.0-0_2.42.12+dfsg-4_amd64.deb",
+      "packageName": "libgdk-pixbuf-2.0-0",
+      "version": "2.42.12+dfsg-4",
+      "architecture": "amd64",
+      "dependencies": [
+        "libgdk-pixbuf2.0-common",
+        "shared-mime-info",
+        "libc6",
+        "libglib2.0-0t64",
+        "libjpeg62-turbo",
+        "libpng16-16t64",
+        "libtiff6"
+      ]
+    },
+    {
+      "fileName": "libgdk-pixbuf2.0-common_2.42.12+dfsg-4_all.deb",
+      "packageName": "libgdk-pixbuf2.0-common",
+      "version": "2.42.12+dfsg-4",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libglib2.0-0t64_2.84.4-3~deb13u2_amd64.deb",
+      "packageName": "libglib2.0-0t64",
+      "version": "2.84.4-3~deb13u2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libatomic1",
+        "libc6",
+        "libffi8",
+        "libmount1",
+        "libpcre2-8-0",
+        "libselinux1",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libgmp10_2%3a6.3.0+dfsg-3_amd64.deb",
+      "packageName": "libgmp10",
+      "version": "2:6.3.0+dfsg-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libgnutls30t64_3.8.9-3+deb13u1_amd64.deb",
+      "packageName": "libgnutls30t64",
+      "version": "3.8.9-3+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgmp10",
+        "libhogweed6t64",
+        "libidn2-0",
+        "libnettle8t64",
+        "libp11-kit0",
+        "libtasn1-6",
+        "libunistring5"
+      ]
+    },
+    {
+      "fileName": "libgraphite2-3_1.3.14-2+b1_amd64.deb",
+      "packageName": "libgraphite2-3",
+      "version": "1.3.14-2+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libgssapi-krb5-2_1.21.3-5_amd64.deb",
+      "packageName": "libgssapi-krb5-2",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libkrb5-3",
+        "libc6",
+        "libcom-err2",
+        "libk5crypto3",
+        "libkrb5support0"
+      ]
+    },
+    {
+      "fileName": "libgtk-3-0t64_3.24.49-3_amd64.deb",
+      "packageName": "libgtk-3-0t64",
+      "version": "3.24.49-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "adwaita-icon-theme",
+        "hicolor-icon-theme",
+        "shared-mime-info",
+        "libatk-bridge2.0-0t64",
+        "libatk1.0-0t64",
+        "libc6",
+        "libcairo-gobject2",
+        "libcairo2",
+        "libcloudproviders0",
+        "libcolord2",
+        "libcups2t64",
+        "libepoxy0",
+        "libfontconfig1",
+        "libfribidi0",
+        "libgdk-pixbuf-2.0-0",
+        "libglib2.0-0t64",
+        "libharfbuzz0b",
+        "libpango-1.0-0",
+        "libpangocairo-1.0-0",
+        "libpangoft2-1.0-0",
+        "libwayland-client0",
+        "libwayland-cursor0",
+        "libwayland-egl1",
+        "libx11-6",
+        "libxcomposite1",
+        "libxcursor1",
+        "libxdamage1",
+        "libxext6",
+        "libxfixes3",
+        "libxi6",
+        "libxinerama1",
+        "libxkbcommon0",
+        "libxrandr2",
+        "libgtk-3-common"
+      ]
+    },
+    {
+      "fileName": "libgtk-3-common_3.24.49-3_all.deb",
+      "packageName": "libgtk-3-common",
+      "version": "3.24.49-3",
+      "architecture": "all",
+      "dependencies": [
+        "dconf-gsettings-backend",
+        "gsettings-backend"
+      ]
+    },
+    {
+      "fileName": "libharfbuzz0b_10.2.0-1+b1_amd64.deb",
+      "packageName": "libharfbuzz0b",
+      "version": "10.2.0-1+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libfreetype6",
+        "libglib2.0-0t64",
+        "libgraphite2-3"
+      ]
+    },
+    {
+      "fileName": "libhogweed6t64_3.10.1-1_amd64.deb",
+      "packageName": "libhogweed6t64",
+      "version": "3.10.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgmp10",
+        "libnettle8t64"
+      ]
+    },
+    {
+      "fileName": "libidn2-0_2.3.8-2_amd64.deb",
+      "packageName": "libidn2-0",
+      "version": "2.3.8-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libunistring5"
+      ]
+    },
+    {
+      "fileName": "libjansson4_2.14-2+b3_amd64.deb",
+      "packageName": "libjansson4",
+      "version": "2.14-2+b3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libjbig0_2.1-6.1+b2_amd64.deb",
+      "packageName": "libjbig0",
+      "version": "2.1-6.1+b2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libjpeg62-turbo_1%3a2.1.5-4_amd64.deb",
+      "packageName": "libjpeg62-turbo",
+      "version": "1:2.1.5-4",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libk5crypto3_1.21.3-5_amd64.deb",
+      "packageName": "libk5crypto3",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libkrb5support0"
+      ]
+    },
+    {
+      "fileName": "libkeyutils1_1.6.3-6_amd64.deb",
+      "packageName": "libkeyutils1",
+      "version": "1.6.3-6",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libkrb5-3_1.21.3-5_amd64.deb",
+      "packageName": "libkrb5-3",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libkrb5support0",
+        "libc6",
+        "libcom-err2",
+        "libk5crypto3",
+        "libkeyutils1",
+        "libssl3t64"
+      ]
+    },
+    {
+      "fileName": "libkrb5support0_1.21.3-5_amd64.deb",
+      "packageName": "libkrb5support0",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "liblcms2-2_2.16-2_amd64.deb",
+      "packageName": "liblcms2-2",
+      "version": "2.16-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "liblerc4_4.0.0+ds-5_amd64.deb",
+      "packageName": "liblerc4",
+      "version": "4.0.0+ds-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgcc-s1",
+        "libstdc++6"
+      ]
+    },
+    {
+      "fileName": "liblzma5_5.8.1-1_amd64.deb",
+      "packageName": "liblzma5",
+      "version": "5.8.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libmount1_2.41-5_amd64.deb",
+      "packageName": "libmount1",
+      "version": "2.41-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libblkid1",
+        "libc6",
+        "libselinux1"
+      ]
+    },
+    {
+      "fileName": "libncurses6_6.5+20250216-2_amd64.deb",
+      "packageName": "libncurses6",
+      "version": "6.5+20250216-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libtinfo6",
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libncursesw6_6.5+20250216-2_amd64.deb",
+      "packageName": "libncursesw6",
+      "version": "6.5+20250216-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libtinfo6",
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libnettle8t64_3.10.1-1_amd64.deb",
+      "packageName": "libnettle8t64",
+      "version": "3.10.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libp11-kit0_0.25.5-3_amd64.deb",
+      "packageName": "libp11-kit0",
+      "version": "0.25.5-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libffi8"
+      ]
+    },
+    {
+      "fileName": "libpango-1.0-0_1.56.3-1_amd64.deb",
+      "packageName": "libpango-1.0-0",
+      "version": "1.56.3-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "fontconfig",
+        "libc6",
+        "libfribidi0",
+        "libglib2.0-0t64",
+        "libharfbuzz0b",
+        "libthai0"
+      ]
+    },
+    {
+      "fileName": "libpangocairo-1.0-0_1.56.3-1_amd64.deb",
+      "packageName": "libpangocairo-1.0-0",
+      "version": "1.56.3-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libcairo2",
+        "libfontconfig1",
+        "libglib2.0-0t64",
+        "libharfbuzz0b",
+        "libpango-1.0-0",
+        "libpangoft2-1.0-0"
+      ]
+    },
+    {
+      "fileName": "libpangoft2-1.0-0_1.56.3-1_amd64.deb",
+      "packageName": "libpangoft2-1.0-0",
+      "version": "1.56.3-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libfontconfig1",
+        "libfreetype6",
+        "libglib2.0-0t64",
+        "libharfbuzz0b",
+        "libpango-1.0-0"
+      ]
+    },
+    {
+      "fileName": "libpcre2-8-0_10.46-1~deb13u1_amd64.deb",
+      "packageName": "libpcre2-8-0",
+      "version": "10.46-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libpixman-1-0_0.44.0-3_amd64.deb",
+      "packageName": "libpixman-1-0",
+      "version": "0.44.0-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libpng16-16t64_1.6.48-1+deb13u1_amd64.deb",
+      "packageName": "libpng16-16t64",
+      "version": "1.6.48-1+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libproc2-0_2%3a4.0.4-9_amd64.deb",
+      "packageName": "libproc2-0",
+      "version": "2:4.0.4-9",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libsystemd0"
+      ]
+    },
+    {
+      "fileName": "libselinux1_3.8.1-1_amd64.deb",
+      "packageName": "libselinux1",
+      "version": "3.8.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libpcre2-8-0"
+      ]
+    },
+    {
+      "fileName": "libsharpyuv0_1.5.0-0.1_amd64.deb",
+      "packageName": "libsharpyuv0",
+      "version": "1.5.0-0.1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libssl3t64_3.5.4-1~deb13u1_amd64.deb",
+      "packageName": "libssl3t64",
+      "version": "3.5.4-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libzstd1",
+        "zlib1g",
+        "openssl-provider-legacy"
+      ]
+    },
+    {
+      "fileName": "libstdc++6_14.2.0-19_amd64.deb",
+      "packageName": "libstdc++6",
+      "version": "14.2.0-19",
+      "architecture": "amd64",
+      "dependencies": [
+        "gcc-14-base",
+        "libc6",
+        "libgcc-s1"
+      ]
+    },
+    {
+      "fileName": "libsystemd0_257.9-1~deb13u1_amd64.deb",
+      "packageName": "libsystemd0",
+      "version": "257.9-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libcap2"
+      ]
+    },
+    {
+      "fileName": "libtasn1-6_4.20.0-2_amd64.deb",
+      "packageName": "libtasn1-6",
+      "version": "4.20.0-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libthai0_0.1.29-2+b1_amd64.deb",
+      "packageName": "libthai0",
+      "version": "0.1.29-2+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libthai-data",
+        "libc6",
+        "libdatrie1"
+      ]
+    },
+    {
+      "fileName": "libthai-data_0.1.29-2_all.deb",
+      "packageName": "libthai-data",
+      "version": "0.1.29-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libtiff6_4.7.0-3+deb13u1_amd64.deb",
+      "packageName": "libtiff6",
+      "version": "4.7.0-3+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libdeflate0",
+        "libjbig0",
+        "libjpeg62-turbo",
+        "liblerc4",
+        "liblzma5",
+        "libwebp7",
+        "libzstd1",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libtinfo6_6.5+20250216-2_amd64.deb",
+      "packageName": "libtinfo6",
+      "version": "6.5+20250216-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libudev1_257.9-1~deb13u1_amd64.deb",
+      "packageName": "libudev1",
+      "version": "257.9-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libcap2"
+      ]
+    },
+    {
+      "fileName": "libunistring5_1.3-2_amd64.deb",
+      "packageName": "libunistring5",
+      "version": "1.3-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libwayland-client0_1.23.1-3_amd64.deb",
+      "packageName": "libwayland-client0",
+      "version": "1.23.1-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libffi8"
+      ]
+    },
+    {
+      "fileName": "libwayland-cursor0_1.23.1-3_amd64.deb",
+      "packageName": "libwayland-cursor0",
+      "version": "1.23.1-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libwayland-client0"
+      ]
+    },
+    {
+      "fileName": "libwayland-egl1_1.23.1-3_amd64.deb",
+      "packageName": "libwayland-egl1",
+      "version": "1.23.1-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libwebp7_1.5.0-0.1_amd64.deb",
+      "packageName": "libwebp7",
+      "version": "1.5.0-0.1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libsharpyuv0"
+      ]
+    },
+    {
+      "fileName": "libx11-6_2%3a1.8.12-1_amd64.deb",
+      "packageName": "libx11-6",
+      "version": "2:1.8.12-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libxcb1",
+        "libx11-data"
+      ]
+    },
+    {
+      "fileName": "libx11-data_2%3a1.8.12-1_all.deb",
+      "packageName": "libx11-data",
+      "version": "2:1.8.12-1",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libxau6_1%3a1.0.11-1_amd64.deb",
+      "packageName": "libxau6",
+      "version": "1:1.0.11-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libxcb1_1.17.0-2+b1_amd64.deb",
+      "packageName": "libxcb1",
+      "version": "1.17.0-2+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libxau6",
+        "libxdmcp6"
+      ]
+    },
+    {
+      "fileName": "libxcb-render0_1.17.0-2+b1_amd64.deb",
+      "packageName": "libxcb-render0",
+      "version": "1.17.0-2+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libxcb1"
+      ]
+    },
+    {
+      "fileName": "libxcb-shm0_1.17.0-2+b1_amd64.deb",
+      "packageName": "libxcb-shm0",
+      "version": "1.17.0-2+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libxcb1"
+      ]
+    },
+    {
+      "fileName": "libxcomposite1_1%3a0.4.6-1_amd64.deb",
+      "packageName": "libxcomposite1",
+      "version": "1:0.4.6-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6"
+      ]
+    },
+    {
+      "fileName": "libxcursor1_1%3a1.2.3-1_amd64.deb",
+      "packageName": "libxcursor1",
+      "version": "1:1.2.3-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6",
+        "libxfixes3",
+        "libxrender1"
+      ]
+    },
+    {
+      "fileName": "libxdamage1_1%3a1.1.6-1+b2_amd64.deb",
+      "packageName": "libxdamage1",
+      "version": "1:1.1.6-1+b2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6"
+      ]
+    },
+    {
+      "fileName": "libxdmcp6_1%3a1.1.5-1_amd64.deb",
+      "packageName": "libxdmcp6",
+      "version": "1:1.1.5-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libxext6_2%3a1.3.4-1+b3_amd64.deb",
+      "packageName": "libxext6",
+      "version": "2:1.3.4-1+b3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6"
+      ]
+    },
+    {
+      "fileName": "libxfixes3_1%3a6.0.0-2+b4_amd64.deb",
+      "packageName": "libxfixes3",
+      "version": "1:6.0.0-2+b4",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6"
+      ]
+    },
+    {
+      "fileName": "libxi6_2%3a1.8.2-1_amd64.deb",
+      "packageName": "libxi6",
+      "version": "2:1.8.2-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6",
+        "libxext6"
+      ]
+    },
+    {
+      "fileName": "libxinerama1_2%3a1.1.4-3+b4_amd64.deb",
+      "packageName": "libxinerama1",
+      "version": "2:1.1.4-3+b4",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6",
+        "libxext6"
+      ]
+    },
+    {
+      "fileName": "libxkbcommon0_1.7.0-2_amd64.deb",
+      "packageName": "libxkbcommon0",
+      "version": "1.7.0-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "xkb-data",
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libxml2_2.12.7+dfsg+really2.9.14-2.1+deb13u2_amd64.deb",
+      "packageName": "libxml2",
+      "version": "2.12.7+dfsg+really2.9.14-2.1+deb13u2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "liblzma5",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libxrandr2_2%3a1.5.4-1+b3_amd64.deb",
+      "packageName": "libxrandr2",
+      "version": "2:1.5.4-1+b3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6",
+        "libxext6",
+        "libxrender1"
+      ]
+    },
+    {
+      "fileName": "libxrender1_1%3a0.9.12-1_amd64.deb",
+      "packageName": "libxrender1",
+      "version": "1:0.9.12-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libx11-6"
+      ]
+    },
+    {
+      "fileName": "libzstd1_1.5.7+dfsg-1_amd64.deb",
+      "packageName": "libzstd1",
+      "version": "1.5.7+dfsg-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "lsb-base_11.6_all.deb",
+      "packageName": "lsb-base",
+      "version": "11.6",
+      "architecture": "all",
+      "dependencies": [
+        "sysvinit-utils"
+      ]
+    },
+    {
+      "fileName": "mtr_0.95-1.1+b1_amd64.deb",
+      "packageName": "mtr",
+      "version": "0.95-1.1+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgdk-pixbuf-2.0-0",
+        "libglib2.0-0t64",
+        "libgtk-3-0t64",
+        "libjansson4",
+        "libncurses6",
+        "libtinfo6"
+      ]
+    },
+    {
+      "fileName": "openssl-provider-legacy_3.5.4-1~deb13u1_amd64.deb",
+      "packageName": "openssl-provider-legacy",
+      "version": "3.5.4-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libssl3t64"
+      ]
+    },
+    {
+      "fileName": "procps_2%3a4.0.4-9_amd64.deb",
+      "packageName": "procps",
+      "version": "2:4.0.4-9",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libncursesw6",
+        "libproc2-0",
+        "libsystemd0",
+        "libtinfo6",
+        "init-system-helpers"
+      ]
+    },
+    {
+      "fileName": "shared-mime-info_2.4-5+b2_amd64.deb",
+      "packageName": "shared-mime-info",
+      "version": "2.4-5+b2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgcc-s1",
+        "libglib2.0-0t64",
+        "libstdc++6",
+        "libxml2"
+      ]
+    },
+    {
+      "fileName": "sysvinit-utils_3.14-4_amd64.deb",
+      "packageName": "sysvinit-utils",
+      "version": "3.14-4",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "traceroute_1%3a2.1.6-1_amd64.deb",
+      "packageName": "traceroute",
+      "version": "1:2.1.6-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "x11-common_1%3a7.7+24+deb13u1_all.deb",
+      "packageName": "x11-common",
+      "version": "1:7.7+24+deb13u1",
+      "architecture": "all",
+      "dependencies": [
+        "lsb-base"
+      ]
+    },
+    {
+      "fileName": "xfonts-encodings_1%3a1.0.4-2.2_all.deb",
+      "packageName": "xfonts-encodings",
+      "version": "1:1.0.4-2.2",
+      "architecture": "all",
+      "dependencies": [
+        "x11-common"
+      ]
+    },
+    {
+      "fileName": "xfonts-utils_1%3a7.7+7_amd64.deb",
+      "packageName": "xfonts-utils",
+      "version": "1:7.7+7",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libfontenc1",
+        "libfreetype6",
+        "zlib1g",
+        "x11-common",
+        "xfonts-encodings"
+      ]
+    },
+    {
+      "fileName": "xkb-data_2.42-1_all.deb",
+      "packageName": "xkb-data",
+      "version": "2.42-1",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "zlib1g_1%3a1.3.dfsg+really1.3.1-1+b1_amd64.deb",
+      "packageName": "zlib1g",
+      "version": "1:1.3.dfsg+really1.3.1-1+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    }
   ]
 }

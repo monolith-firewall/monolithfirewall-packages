@@ -5,13 +5,28 @@
   "description": "Network management package with DHCP, DNS, and firewall modules",
   "author": "Monolith FireWall Team",
   "dependencies": [],
+  "aptDependencies": [
+    "isc-dhcp-server",
+    "bind9"
+  ],
   "capabilities": {
     "autoFirewall": true,
     "autoGateway": true
   },
   "interfaceDefaults": {
-    "dhcp": { "role": "lan", "addressFamilies": [ "ipv4" ] },
-    "dns": { "role": "lan", "addressFamilies": [ "ipv4", "ipv6" ] }
+    "dhcp": {
+      "role": "lan",
+      "addressFamilies": [
+        "ipv4"
+      ]
+    },
+    "dns": {
+      "role": "lan",
+      "addressFamilies": [
+        "ipv4",
+        "ipv6"
+      ]
+    }
   },
   "requiresFirewallOpen": true,
   "firewallIntents": [
@@ -86,6 +101,690 @@
       "destinationType": "any",
       "destinationPort": "53",
       "description": "Allow DNS TCP resolver (IPv6)"
+    }
+  ],
+  "bundledDebs": [
+    {
+      "fileName": "adduser_3.152_all.deb",
+      "packageName": "adduser",
+      "version": "3.152",
+      "architecture": "all",
+      "dependencies": [
+        "passwd"
+      ]
+    },
+    {
+      "fileName": "base-passwd_3.6.7_amd64.deb",
+      "packageName": "base-passwd",
+      "version": "3.6.7",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libdebconfclient0",
+        "libselinux1"
+      ]
+    },
+    {
+      "fileName": "bind9_1%3a9.20.15-1~deb13u1_amd64.deb",
+      "packageName": "bind9",
+      "version": "1:9.20.15-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "adduser",
+        "bind9-libs",
+        "bind9-utils",
+        "debconf",
+        "debconf-2.0",
+        "dns-root-data",
+        "iproute2",
+        "netbase",
+        "libc6",
+        "libcap2",
+        "libfstrm0",
+        "libjemalloc2",
+        "libjson-c5",
+        "liblmdb0",
+        "libmaxminddb0",
+        "libnghttp2-14",
+        "libprotobuf-c1",
+        "libssl3t64",
+        "liburcu8t64",
+        "libuv1t64",
+        "libxml2",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "bind9-libs_1%3a9.20.15-1~deb13u1_amd64.deb",
+      "packageName": "bind9-libs",
+      "version": "1:9.20.15-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libfstrm0",
+        "libgssapi-krb5-2",
+        "libjemalloc2",
+        "libjson-c5",
+        "libkrb5-3",
+        "liblmdb0",
+        "libmaxminddb0",
+        "libnghttp2-14",
+        "libprotobuf-c1",
+        "libssl3t64",
+        "liburcu8t64",
+        "libuv1t64",
+        "libxml2",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "bind9-utils_1%3a9.20.15-1~deb13u1_amd64.deb",
+      "packageName": "bind9-utils",
+      "version": "1:9.20.15-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "bind9-libs",
+        "libc6",
+        "libjemalloc2",
+        "libssl3t64",
+        "liburcu8t64"
+      ]
+    },
+    {
+      "fileName": "debconf_1.5.91_all.deb",
+      "packageName": "debconf",
+      "version": "1.5.91",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "debianutils_5.23.2_amd64.deb",
+      "packageName": "debianutils",
+      "version": "5.23.2",
+      "architecture": "amd64",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "dns-root-data_2025080400~deb13u1_all.deb",
+      "packageName": "dns-root-data",
+      "version": "2025080400~deb13u1",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "gcc-14-base_14.2.0-19_amd64.deb",
+      "packageName": "gcc-14-base",
+      "version": "14.2.0-19",
+      "architecture": "amd64",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "iproute2_6.15.0-1_amd64.deb",
+      "packageName": "iproute2",
+      "version": "6.15.0-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "debconf",
+        "debconf-2.0",
+        "libbpf1",
+        "libc6",
+        "libcap2",
+        "libdb5.3t64",
+        "libelf1t64",
+        "libmnl0",
+        "libselinux1",
+        "libtirpc3t64",
+        "libxtables12",
+        "libcap2-bin"
+      ]
+    },
+    {
+      "fileName": "isc-dhcp-server_4.4.3-P1-8_amd64.deb",
+      "packageName": "isc-dhcp-server",
+      "version": "4.4.3-P1-8",
+      "architecture": "amd64",
+      "dependencies": [
+        "debconf",
+        "debconf-2.0",
+        "libc6",
+        "debianutils"
+      ]
+    },
+    {
+      "fileName": "libacl1_2.3.2-2+b1_amd64.deb",
+      "packageName": "libacl1",
+      "version": "2.3.2-2+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libattr1_1%3a2.5.2-3_amd64.deb",
+      "packageName": "libattr1",
+      "version": "1:2.5.2-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libaudit1_1%3a4.0.2-2+b2_amd64.deb",
+      "packageName": "libaudit1",
+      "version": "1:4.0.2-2+b2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libaudit-common",
+        "libc6",
+        "libcap-ng0"
+      ]
+    },
+    {
+      "fileName": "libaudit-common_1%3a4.0.2-2_all.deb",
+      "packageName": "libaudit-common",
+      "version": "1:4.0.2-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libbpf1_1%3a1.5.0-3_amd64.deb",
+      "packageName": "libbpf1",
+      "version": "1:1.5.0-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libelf1t64",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libbsd0_0.12.2-2_amd64.deb",
+      "packageName": "libbsd0",
+      "version": "0.12.2-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libmd0"
+      ]
+    },
+    {
+      "fileName": "libbz2-1.0_1.0.8-6_amd64.deb",
+      "packageName": "libbz2-1.0",
+      "version": "1.0.8-6",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libc6_2.41-12+deb13u1_amd64.deb",
+      "packageName": "libc6",
+      "version": "2.41-12+deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libgcc-s1"
+      ]
+    },
+    {
+      "fileName": "libcap2_1%3a2.75-10+b3_amd64.deb",
+      "packageName": "libcap2",
+      "version": "1:2.75-10+b3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libcap2-bin_1%3a2.75-10+b3_amd64.deb",
+      "packageName": "libcap2-bin",
+      "version": "1:2.75-10+b3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libcap2"
+      ]
+    },
+    {
+      "fileName": "libcap-ng0_0.8.5-4+b1_amd64.deb",
+      "packageName": "libcap-ng0",
+      "version": "0.8.5-4+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libcom-err2_1.47.2-3+b7_amd64.deb",
+      "packageName": "libcom-err2",
+      "version": "1.47.2-3+b7",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libcrypt1_1%3a4.4.38-1_amd64.deb",
+      "packageName": "libcrypt1",
+      "version": "1:4.4.38-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libdb5.3t64_5.3.28+dfsg2-9_amd64.deb",
+      "packageName": "libdb5.3t64",
+      "version": "5.3.28+dfsg2-9",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libdebconfclient0_0.280_amd64.deb",
+      "packageName": "libdebconfclient0",
+      "version": "0.280",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libelf1t64_0.192-4_amd64.deb",
+      "packageName": "libelf1t64",
+      "version": "0.192-4",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libzstd1",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libfstrm0_0.6.1-1+b3_amd64.deb",
+      "packageName": "libfstrm0",
+      "version": "0.6.1-1+b3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libgcc-s1_14.2.0-19_amd64.deb",
+      "packageName": "libgcc-s1",
+      "version": "14.2.0-19",
+      "architecture": "amd64",
+      "dependencies": [
+        "gcc-14-base",
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libgssapi-krb5-2_1.21.3-5_amd64.deb",
+      "packageName": "libgssapi-krb5-2",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libkrb5-3",
+        "libc6",
+        "libcom-err2",
+        "libk5crypto3",
+        "libkrb5support0"
+      ]
+    },
+    {
+      "fileName": "libjemalloc2_5.3.0-3_amd64.deb",
+      "packageName": "libjemalloc2",
+      "version": "5.3.0-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgcc-s1",
+        "libstdc++6"
+      ]
+    },
+    {
+      "fileName": "libjson-c5_0.18+ds-1_amd64.deb",
+      "packageName": "libjson-c5",
+      "version": "0.18+ds-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libk5crypto3_1.21.3-5_amd64.deb",
+      "packageName": "libk5crypto3",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libkrb5support0"
+      ]
+    },
+    {
+      "fileName": "libkeyutils1_1.6.3-6_amd64.deb",
+      "packageName": "libkeyutils1",
+      "version": "1.6.3-6",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libkrb5-3_1.21.3-5_amd64.deb",
+      "packageName": "libkrb5-3",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libkrb5support0",
+        "libc6",
+        "libcom-err2",
+        "libk5crypto3",
+        "libkeyutils1",
+        "libssl3t64"
+      ]
+    },
+    {
+      "fileName": "libkrb5support0_1.21.3-5_amd64.deb",
+      "packageName": "libkrb5support0",
+      "version": "1.21.3-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "liblmdb0_0.9.31-1+b2_amd64.deb",
+      "packageName": "liblmdb0",
+      "version": "0.9.31-1+b2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "liblzma5_5.8.1-1_amd64.deb",
+      "packageName": "liblzma5",
+      "version": "5.8.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libmaxminddb0_1.12.2-1_amd64.deb",
+      "packageName": "libmaxminddb0",
+      "version": "1.12.2-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libmd0_1.1.0-2+b1_amd64.deb",
+      "packageName": "libmd0",
+      "version": "1.1.0-2+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libmnl0_1.0.5-3_amd64.deb",
+      "packageName": "libmnl0",
+      "version": "1.0.5-3",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libnghttp2-14_1.64.0-1.1_amd64.deb",
+      "packageName": "libnghttp2-14",
+      "version": "1.64.0-1.1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libpam0g_1.7.0-5_amd64.deb",
+      "packageName": "libpam0g",
+      "version": "1.7.0-5",
+      "architecture": "amd64",
+      "dependencies": [
+        "libaudit1",
+        "libc6",
+        "debconf",
+        "debconf-2.0"
+      ]
+    },
+    {
+      "fileName": "libpam-modules_1.7.0-5_amd64.deb",
+      "packageName": "libpam-modules",
+      "version": "1.7.0-5",
+      "architecture": "amd64",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libpcre2-8-0_10.46-1~deb13u1_amd64.deb",
+      "packageName": "libpcre2-8-0",
+      "version": "10.46-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libprotobuf-c1_1.5.1-1_amd64.deb",
+      "packageName": "libprotobuf-c1",
+      "version": "1.5.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libselinux1_3.8.1-1_amd64.deb",
+      "packageName": "libselinux1",
+      "version": "3.8.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libpcre2-8-0"
+      ]
+    },
+    {
+      "fileName": "libsemanage2_3.8.1-1_amd64.deb",
+      "packageName": "libsemanage2",
+      "version": "3.8.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libsemanage-common",
+        "libaudit1",
+        "libbz2-1.0",
+        "libc6",
+        "libselinux1",
+        "libsepol2"
+      ]
+    },
+    {
+      "fileName": "libsemanage-common_3.8.1-1_all.deb",
+      "packageName": "libsemanage-common",
+      "version": "3.8.1-1",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "libsepol2_3.8.1-1_amd64.deb",
+      "packageName": "libsepol2",
+      "version": "3.8.1-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libssl3t64_3.5.4-1~deb13u1_amd64.deb",
+      "packageName": "libssl3t64",
+      "version": "3.5.4-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libzstd1",
+        "zlib1g",
+        "openssl-provider-legacy"
+      ]
+    },
+    {
+      "fileName": "libstdc++6_14.2.0-19_amd64.deb",
+      "packageName": "libstdc++6",
+      "version": "14.2.0-19",
+      "architecture": "amd64",
+      "dependencies": [
+        "gcc-14-base",
+        "libc6",
+        "libgcc-s1"
+      ]
+    },
+    {
+      "fileName": "libtirpc3t64_1.3.6+ds-1_amd64.deb",
+      "packageName": "libtirpc3t64",
+      "version": "1.3.6+ds-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libgssapi-krb5-2",
+        "libtirpc-common"
+      ]
+    },
+    {
+      "fileName": "libtirpc-common_1.3.6+ds-1_all.deb",
+      "packageName": "libtirpc-common",
+      "version": "1.3.6+ds-1",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "liburcu8t64_0.15.2-2_amd64.deb",
+      "packageName": "liburcu8t64",
+      "version": "0.15.2-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libuv1t64_1.50.0-2_amd64.deb",
+      "packageName": "libuv1t64",
+      "version": "1.50.0-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libxml2_2.12.7+dfsg+really2.9.14-2.1+deb13u2_amd64.deb",
+      "packageName": "libxml2",
+      "version": "2.12.7+dfsg+really2.9.14-2.1+deb13u2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "liblzma5",
+        "zlib1g"
+      ]
+    },
+    {
+      "fileName": "libxtables12_1.8.11-2_amd64.deb",
+      "packageName": "libxtables12",
+      "version": "1.8.11-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "libzstd1_1.5.7+dfsg-1_amd64.deb",
+      "packageName": "libzstd1",
+      "version": "1.5.7+dfsg-1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
+    },
+    {
+      "fileName": "login.defs_1%3a4.17.4-2_all.deb",
+      "packageName": "login.defs",
+      "version": "1:4.17.4-2",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "netbase_6.5_all.deb",
+      "packageName": "netbase",
+      "version": "6.5",
+      "architecture": "all",
+      "dependencies": [
+        ""
+      ]
+    },
+    {
+      "fileName": "openssl-provider-legacy_3.5.4-1~deb13u1_amd64.deb",
+      "packageName": "openssl-provider-legacy",
+      "version": "3.5.4-1~deb13u1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6",
+        "libssl3t64"
+      ]
+    },
+    {
+      "fileName": "passwd_1%3a4.17.4-2_amd64.deb",
+      "packageName": "passwd",
+      "version": "1:4.17.4-2",
+      "architecture": "amd64",
+      "dependencies": [
+        "base-passwd",
+        "libpam-modules",
+        "login.defs",
+        "libacl1",
+        "libattr1",
+        "libaudit1",
+        "libbsd0",
+        "libc6",
+        "libcrypt1",
+        "libpam0g",
+        "libselinux1",
+        "libsemanage2"
+      ]
+    },
+    {
+      "fileName": "zlib1g_1%3a1.3.dfsg+really1.3.1-1+b1_amd64.deb",
+      "packageName": "zlib1g",
+      "version": "1:1.3.dfsg+really1.3.1-1+b1",
+      "architecture": "amd64",
+      "dependencies": [
+        "libc6"
+      ]
     }
   ]
 }
